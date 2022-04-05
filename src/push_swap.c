@@ -30,7 +30,7 @@ void	push_swap(t_data *data, char **av)
 
 	if (check_sorted(data) == 1)
 		end(data);
-//	quick_sort(data);
+	quick_sort(data);
 //	t_nbr	*temp;
 	temp = data->stack_a;
 	while (temp != NULL)

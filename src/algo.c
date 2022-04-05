@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/05 11:55:14 by ccottin           #+#    #+#             */
+/*   Updated: 2022/04/05 13:14:12 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 t_nbr	*find_pivot(t_data *data)
@@ -13,22 +25,23 @@ t_nbr	*find_pivot(t_data *data)
 void	quick_sort(t_data *data)
 {
 	t_nbr	*pivot;
-	t_nbr	*comp;
+	t_nbr	*mark;
 	int	i;
 
-	comp = data->stack_a;
+	mark = data->stack_a;
 	pivot = find_pivot(data);
  	i = 0;
-	printf("%d\n", pivot->nb);
 	while (i < data->total)
 	{
-		if (comp->nb < pivot->nb)
+		printf("comp = %d pivot = %d i =%d \n", data->stack_a->nb, pivot->nb, i);
+		if (data->stack_a->ord < pivot->ord)
 		{
+			printf("pivot = %d, data = %d\n", pivot->nb, data->stack_a->nb);
 			pb(data);
 		}
-		printf("%d\n", comp->nb);
-		comp = comp->next;
-		printf("%d\n", comp->nb);
+		else
+			data->stack_a = data->stack_a->next;
 		i++;
 	}
+	data->stack_a = mark;
 }

@@ -4,6 +4,7 @@ void	pb(t_data *data)
 {
 	t_nbr	*temp;
 
+	printf("data = %p\n", data->stack_a);
 	if (data->stack_a == NULL)
 		return;
 	temp = data->stack_a;
@@ -12,6 +13,7 @@ void	pb(t_data *data)
 	data->stack_b = temp;
 	data->temp.move = stock_move(data, "pb");
 	data->temp.nb_move++;
+	printf("data = %p\n", data->stack_a);
 }
 
 void	pa(t_data *data)

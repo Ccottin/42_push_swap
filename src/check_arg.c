@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_arg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/05 11:23:54 by ccottin           #+#    #+#             */
+/*   Updated: 2022/04/05 11:24:27 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 #include <stdio.h>
-
 
 //verifier + coder si le checker accepte les whitespaces ou pas, pour l'instant il les accepte
 //check si tout le bail est déjà trié
@@ -35,7 +46,7 @@ int	check_nbr(t_nbr *stack_a, long int nb)
 	t_nbr	*temp;
 
 	if (nb > 2147483647 || nb < -2147483648)
-			return (-1);
+		return (-1);
 	temp = stack_a;
 	while (temp != NULL)
 	{
