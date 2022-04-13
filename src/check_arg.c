@@ -15,6 +15,7 @@
 
 //verifier + coder si le checker accepte les whitespaces ou pas, pour l'instant il les accepte
 //check si tout le bail est déjà trié
+//ajouter lq chaine de caractere entre guillemet
 
 void	error(int err, t_nbr *stack_a)
 {

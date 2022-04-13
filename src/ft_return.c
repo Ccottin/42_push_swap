@@ -2,8 +2,8 @@
 
 void	free_all(t_data *data)
 {
-	ft_lstclear(&data->stack_a);
-	ft_lstclear(&data->stack_b);
+	ft_lstclear(&(data->stack_a));
+	ft_lstclear(&(data->stack_b));
 	if (data->temp.move != NULL)
 		free(data->temp.move);
 }

@@ -42,8 +42,9 @@ void	ft_add_back(t_nbr **stack, t_nbr *elem)
 void	ft_add_front(t_nbr **stack, t_nbr *elem)
 {
 	if (*stack == NULL)
-		*stack = elem;
-	elem->next = *stack;
+		elem->next = NULL;
+	else
+		elem->next = *stack;
 	*stack = elem;
 }
 

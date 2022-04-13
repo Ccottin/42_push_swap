@@ -34,14 +34,13 @@ void	quick_sort(t_data *data)
 	while (i < data->total)
 	{
 		printf("comp = %d pivot = %d i =%d \n", data->stack_a->nb, pivot->nb, i);
-		if (data->stack_a->ord < pivot->ord)
+		if (mark->ord < pivot->ord)
 		{
 			printf("pivot = %d, data = %d\n", pivot->nb, data->stack_a->nb);
 			pb(data);
 		}
 		else
-			data->stack_a = data->stack_a->next;
+			mark = mark->next;
 		i++;
 	}
-	data->stack_a = mark;
 }

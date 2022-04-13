@@ -27,7 +27,6 @@ void	push_swap(t_data *data, char **av)
 		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 		temp = temp->next;
 	}
-
 	if (check_sorted(data) == 1)
 		end(data);
 	quick_sort(data);
