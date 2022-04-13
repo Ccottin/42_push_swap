@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:56:49 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/05 11:56:50 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/13 18:30:35 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_lstclear(t_nbr **stack)
 
 	while (*stack != NULL)
 	{
+		printf("%d\n", (*stack)->nb);
 		temp = *stack;
 		*stack = (*stack)->next;
 		temp->next = NULL;

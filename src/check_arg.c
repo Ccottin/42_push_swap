@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:54 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/05 11:24:27 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/13 18:21:26 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //verifier + coder si le checker accepte les whitespaces ou pas, pour l'instant il les accepte
 //check si tout le bail est déjà trié
 //ajouter lq chaine de caractere entre guillemet
+//pk le zero passe pas??i/
 
 void	error(int err, t_nbr *stack_a)
 {

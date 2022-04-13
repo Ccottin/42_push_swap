@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
+/*   Updated: 2022/04/13 19:28:08 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 int	check_sorted(t_data *data)
@@ -27,10 +39,13 @@ void	push_swap(t_data *data, char **av)
 		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 		temp = temp->next;
 	}
+	printf("next\n");
 	if (check_sorted(data) == 1)
 		end(data);
 	quick_sort(data);
-//	t_nbr	*temp;
+//	t_nbr	*temp;	
+//	pb(data);
+//	pb(data);
 	temp = data->stack_a;
 	while (temp != NULL)
 	{

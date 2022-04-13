@@ -9,7 +9,7 @@ OBJ	= $(SRC:.c=.o)
 		
 CC	= gcc
 
-CFLAG	= -Wall -Wextra -Werror -g
+CFLAG	= -Wall -Wextra -Werror -g3
 
 all	:	$(NAME)
 
@@ -17,7 +17,6 @@ all	:	$(NAME)
 		$(CC) $(CFLAG) -Iinclude -c $< -o $@
 
 $(NAME)	:	$(OBJ)
-#		make -C ./libft -Llibftaprès le -o
 		$(CC) $(CFLAG) -o $@ $^ 
 
 clean	:

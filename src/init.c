@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:41 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/05 11:23:43 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/13 21:08:59 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_init(t_data *data, char **av)
 	data->stack_a = stack_a;
 	init_stack_a(data, av);
 	ord_stacka(data);
-	stack_b = NULL;
+	stack_b;
 	data->stack_b = stack_b;
 	data->temp.nb_move = 0;
 	data->temp.move = NULL;
