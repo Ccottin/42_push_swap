@@ -60,7 +60,6 @@ void	sb(t_data *data, int x)
 		data->temp.move = stock_move(data, "sb");
 		data->temp.nb_move++;
 	}
-
 }
 
 void	ss(t_data *data)

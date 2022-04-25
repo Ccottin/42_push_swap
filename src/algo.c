@@ -11,45 +11,77 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-t_nbr	*find_pivot(t_data *data)
+/*
+int	find_pivot(t_data *data)
 {
 	t_nbr	*pivot;
+	int	mid;
 
 	pivot = data->stack_a;
-	while (pivot->next != NULL)
+	mid = data->total / 2;
+	while (pivot->ord != mid)
 		pivot = pivot->next;
 	return (pivot);
 }
 
+peut être = diviser en deux grosses stack pour les quick sort chacune individuellement, la a = gros chffre ordre décroissant et la b petit chiffre ordre décroissant, puis faire un pa jusqu'a ce que ce soit goode? autre idée = le mur est dans b et c le seul élément? en attendant ra
+*/
+
 void	quick_sort(t_data *data)
 {
-	t_nbr	*pivot;
-	t_nbr	*mark;
+	int	pivot;
 	int	i;
 
-	mark = data->stack_a;
-	pivot = find_pivot(data);
+	pivot = data->total / 2;
  	i = 0;
-	while (i < data->total && data->stack_a != NULL)
+	while (i < data->total)
 	{
-		printf("comp = %d pivot = %d i =%d \n", data->stack_a->nb, pivot->nb, i);
-		if (data->stack_a->ord == pivot->ord)
+		if (data->stack_a->ord < pivot)
 			pb(data);
-		else if (data->stack_a->ord < pivot->ord)
-		{
-			printf("pivot = %d, data = %d\n", pivot->nb, data->stack_a->nb);
-			pb(data);
-		}
-		printf("appel %d, stack a = %d, \n", i, data->stack_a->nb);
 		else
-			data->stack_a = data->stack_a->next;
+			ra(data, 0);
+	/*	if (data->stack_b->ord)
+		{
+			if (data->stack_a->ord > data->stack_a->next->ord && data->stack_b->ord < data->stack_b->next->ord)
+				ss(data);
+			else if (data->stack_a->ord > data->stack_a->next->ord)
+				sa(data, 0);
+			else if (data->stack_b->ord < data->stack_b->next->ord)
+			       sb(data, 0);
+		}*/
 		i++;
-		if (data->stack_a != NULL)
-		printf("appel %d, stack a = %d, \n", i, data->stack_a->nb);
-		if (data->stack_b != NULL)
-			printf("stack b = %d\n\n", data->stack_b->nb);
 	}
-	data->stack_a = mark;
-	printf("%p\n", &data->stack_a);
+	t_nbr *temp = data->stack_a;
+	while (temp != NULL)
+	{
+		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
+	temp = data->stack_b;
+	while (temp != NULL)
+	{
+		printf("stakb nb = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
 }
+/*
+void	quick_sort_2(t_nbr *stack, int size)
+{
+	t_nbr	*wall;
+	int	i;
+	int	pivot;
+
+	pivot = size - 1;
+	wall = stack;
+	i = 0;
+	while (i < size)
+	{
+		if (stack->nbr < pivot)
+		{
+			if (wall != stack)
+					
+		}
+	}
+	quick_sort_2(stack, wall - 1);
+	quick_sort_2(stack + wall -1, size - wall + 1);
+}*/

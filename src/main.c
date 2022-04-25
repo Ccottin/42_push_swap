@@ -11,17 +11,25 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
- 
-// peut-on passer en argument une looongue chaine de caractère avecque des int? entre guillemets
 
 int	main(int ac, char **av)
 {
 	t_data	data;
+	char	**tab;
 
-	if (ac < 3)
-		return (0);
-	check_arg(av);
-	push_swap(&data, av);
-	free_all(&data);
+	if (ac == 2)
+	{
+		tab = ft_split(av[1], ' ');
+		if (!tab)
+			exit(1);
+		check_arg(tab, 0);
+		freeable(tab);
+	}
+	else if (ac > 2)
+		check_arg(av, 1);
+	else
+		exit(0);
+	push_swap(&data, av, ac);
+	end(&data);
 	return (0);
 }

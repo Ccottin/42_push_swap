@@ -12,6 +12,19 @@
 
 #include "../include/push_swap.h"
 
+void	freeable(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 void	free_all(t_data *data)
 {
 	ft_lstclear(&(data->stack_a));

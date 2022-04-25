@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include <stdio.h>
-
-//verifier + coder si le checker accepte les whitespaces ou pas, pour l'instant il les accepte
-//check si tout le bail est déjà trié
-//ajouter lq chaine de caractere entre guillemet
-//pk le zero passe pas??i/
 
 void	error(int err, t_nbr *stack_a)
 {
@@ -35,8 +29,8 @@ int	check_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (((str[i] < 47 || str[i] > 58) && (str[i] < 9 || str[i] > 13))
-			|| str[i] != 45 || str[i] != 43 || str[i] != 32)
+		if ((str[i] < 48 || str[i] > 57) && str[i] != 45
+			&& str[i] != 43 && str[i] != 32)
 			return (-1);
 		i++;
 	}
@@ -59,30 +53,50 @@ int	check_nbr(t_nbr *stack_a, long int nb)
 	return (0);
 }
 
-int	check_arg(char **av)
+int	fill_stack(char **tab, t_nbr **stack_a, int m)
 {
-	int		i;
+	int	i;
+	t_nbr	*temp;
 	long int	nb;
-	t_nbr		*temp;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (i == 0)
+			i += m;
+		if (check_char(tab[i]) == -1)
+			return (-1);
+		nb = ft_atoi(tab[i]);
+		if (check_nbr(*stack_a, nb) == -1)
+			return (-1);
+		temp = ft_lstnew(nb);
+		if (!temp)
+			return (-2);
+		ft_add_back(stack_a, temp);
+		i++;
+	}
+	return (0);
+}
+
+int	check_arg(char **av, int m)
+{
+	int	i;
 	t_nbr		*stack_a;
 
 	stack_a = NULL;
-	i = 1;
+	i = 0;
 	while (av[i])
-	{
-	/*	if (check_char(av[i]) == -1)
-			return (-1);*/
-		nb = ft_atoi(av[i]);
-		if (!nb)
-			error(-2, stack_a);
-		if (check_nbr(stack_a, nb) == -1)
-			error(-1, stack_a);
-		temp = ft_lstnew(nb);
-		if (!temp)
-			error(-2, stack_a);
-		ft_add_back(&stack_a, temp);
 		i++;
+	if (i < 2)
+	{
+		freeable(av);
+		exit(0);
 	}
+	i = fill_stack(av, &stack_a, m);
+	if (i != 0 && m == 0)
+		freeable(av);
+	if (i != 0)
+		error(i, stack_a);
 	ft_lstclear(&stack_a);
 	return (0);
 }

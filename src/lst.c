@@ -54,7 +54,6 @@ void	ft_lstclear(t_nbr **stack)
 
 	while (*stack != NULL)
 	{
-		printf("%d\n", (*stack)->nb);
 		temp = *stack;
 		*stack = (*stack)->next;
 		temp->next = NULL;

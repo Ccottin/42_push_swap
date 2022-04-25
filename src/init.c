@@ -44,18 +44,18 @@ void	ord_stacka(t_data *data)
 	data->total = total;
 }
 
-void	init_stack_a(t_data *data, char **av)
+void	init_stack_a(t_data *data, char **av, int ac)
 {
 	t_nbr	*temp;
 	int	i;
 	int	nb;
 
 	i = 1;
+	if (ac == 2)
+		i = 0;
 	while (av[i])
 	{
 		nb = ft_atoi(av[i]);
-		if (!nb)
-			c_error(data);
 		temp = ft_lstnew(nb);
 		if (!temp)
 			c_error(data);
@@ -64,16 +64,22 @@ void	init_stack_a(t_data *data, char **av)
 	}
 }
 
-void	ft_init(t_data *data, char **av)
+void	ft_init(t_data *data, char **av, int ac)
 {
 	t_nbr	*stack_a;
 	t_nbr	*stack_b;
 
+	if (ac == 2)
+		av = ft_split(av[1], ' ');
+	if (av == NULL)
+		c_error(data);
 	stack_a = NULL;
 	data->stack_a = stack_a;
-	init_stack_a(data, av);
+	init_stack_a(data, av, ac);
+	if (ac == 2)
+		freeable(av);
 	ord_stacka(data);
-	stack_b;
+	stack_b = NULL;
 	data->stack_b = stack_b;
 	data->temp.nb_move = 0;
 	data->temp.move = NULL;
