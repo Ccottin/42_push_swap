@@ -17,7 +17,6 @@ int	count_move(t_nbr *stack, int rank)
 	temp = stack;
 	while (temp->ord != rank)
 	{
-		printf("temp = %d, rank = %d", temp->ord, rank);
 		temp = temp->next;
 		i++;
 	}
@@ -40,17 +39,10 @@ void	ft_ra(t_data *data, t_nbr *small)
 {
 	while (data->stack_a != small)
 	{
-		if (data->stack_a->ord < data->total / 2)
+	/*	if (data->stack_a->ord < data->total / 2)
 			pb(data);
-		else
+		else*/
 			ra(data, 0);
-		if (data->stack_a->ord < data->stack_a->next->ord && data->stack_b->ord 
-			&& data->stack_b->ord < data->stack_b->next->ord)
-			ss(data);
-		else if (data->stack_a->ord < data->stack_a->next->ord)
-			sa(data, 0);
-		else if (data->stack_b->ord && data->stack_b->ord < data->stack_b->next->ord)
-			sb(data, 0);
 	}
 }
 
@@ -58,34 +50,76 @@ void	ft_rra(t_data *data, t_nbr *small)
 {
 	while (data->stack_a != small)
 	{
-		if (data->stack_a->ord < data->total / 2)
+	/*	if (data->stack_a->ord < data->total / 2)
 			pb(data);
-		else
+		else*/
 			rra(data, 0);
-		if (data->stack_b->ord && data->stack_b->ord)
-		{
-			if (data->stack_a->ord < data->stack_a->next->ord
-				&& data->stack_b->ord < data->stack_b->next->ord)
-				ss(data);
-			else if (data->stack_a->ord < data->stack_a->next->ord)
-				sa(data, 0);
-			else if (data->stack_b->ord < data->stack_b->next->ord)
-				sb(data, 0);
-		}
 	}
+}
+
+int	check_ord(t_data *data)
+{
+	int	i;
+	t_nbr	*temp;
+
+	i = 0;
+	if (data->stack_b == NULL)
+		return (0);
+	temp = data->stack_b;
+	while (temp->next != NULL)
+	{
+		if (temp->ord == temp->next->ord + 1)
+			i++;
+		temp = temp->next;
+	}
+	i++;
+	temp = data->stack_a;
+	while (temp->next != NULL)
+	{
+		if (temp->ord == temp->next->ord - 1)
+			i++;
+		temp = temp->next;
+	}
+	i++;
+	printf("i = %d, total = %d \n", i, data->total);
+	if (i == data->total)
+		return (1);
+	return (0);
 }
 
 void	bubble_sort(t_data *data)
 {
 	t_nbr	*small;
 	int	move;
-
-	small = find_small(data->stack_a, 0);
-	move = count_move(data->stack_a, 0);
-	if (move > 0)
-		ft_ra(data, small);
-	if (move < 0)
-		ft_rra(data, small);
-	pb(data);
-	rb(data, 0);
+	int	i;
+	t_nbr	*temp;
+	i = 0;
+	while (check_ord(data) != 1 && i < data->total)
+	{
+		temp = data->stack_a;
+		while (temp != NULL)
+		{
+			printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
+			temp = temp->next;
+		}
+		temp = data->stack_b;
+		while (temp != NULL)
+		{
+			printf("stakb nb = %d ord = %d\n", temp->nb, temp->ord);
+			temp = temp->next;
+		}
+		printf("i = repere = %d\n", i);
+		small = find_small(data->stack_a, i);
+		move = count_move(data->stack_a, i);
+		if (move > 0)
+			ft_ra(data, small);
+		if (move < 0)
+			ft_rra(data, small);
+		if (data->stack_a->ord > data->stack_a->next->ord)
+			sa(data, 0);
+		pb(data);
+		i++;
+	}
+	while (data->stack_b != NULL)
+		pa(data);
 }

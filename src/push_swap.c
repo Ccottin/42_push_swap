@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/13 19:28:08 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/25 18:13:28 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	push_swap(t_data *data, char **av, int ac)
 //	quick_sort(data);
 	bubble_sort(data);
 	if (check_sorted(data) == 1)
-		printf("%s\n", data->temp.move);
+		printf("%d : %s\n", data->temp.nb_move, data->temp.move);
 //	t_nbr	*temp;	
 //	pb(data);
 //	pb(data);
