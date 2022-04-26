@@ -6,26 +6,26 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:35:34 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/26 17:32:22 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/26 17:54:03 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-char	*get_int(int nb)
+char	*get_int(unsigned int nb)
 {
 	char	*ret;
 	int	i;
 
-	ret = ft_calloc(17);
+	ret = ft_calloc(33);
 	if (!ret)
 		return (NULL);
-	i = 15;
-	if (nb < 0)
+	i = 31;
+	/*if (nb < 0)
 		ret[0] = '1';
 	else
-		ret[0] = '0';
-	while (i != 0)
+		ret[0] = '0';*/
+	while (i != -1)
 	{
 		if ((nb & 1) == 1)
 			ret[i] = '1';
@@ -85,7 +85,7 @@ void	radix_sort(t_data *data)
 	int	j;
 
 	get_bin(data);
-	i = 15;
+	i = 31;
 	while (i != 0)
 	{
 		j = 0;
@@ -94,7 +94,6 @@ void	radix_sort(t_data *data)
 			sort(data, i, '0');
 			j++;
 		}
-		ft_test(data);
 		while (data->stack_b != NULL)
 			pa(data);
 		i--;
