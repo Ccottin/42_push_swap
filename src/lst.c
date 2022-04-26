@@ -6,11 +6,26 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:56:49 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/13 18:30:35 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/26 19:50:22 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+int	ft_lstlen(t_nbr *list)
+{
+	t_nbr	*temp;
+	int	i;
+
+	i = 0;
+	temp = list;
+	while (temp != NULL)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
+}
 
 t_nbr	*ft_lstnew(int nb)
 {

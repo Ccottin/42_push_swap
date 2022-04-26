@@ -25,10 +25,12 @@ typedef struct s_data {
 }		t_data;
 
 
-int	check_arg(char **av, int m);
 int	ft_strlen(char *str);
-char	*stock_move(t_data *data, char *move);
+int	ft_lstlen(t_nbr *list);
+long int	ft_atoi(char *str);
+int	check_arg(char **av, int m);
 char	**ft_split(char *s, char c);
+char	*stock_move(t_data *data, char *move);
 t_nbr	*ft_lstnew(int nb);
 void	end(t_data *data);
 void	freeable(char **tab);
@@ -37,7 +39,6 @@ void	free_all(t_data *data);
 void	ft_add_back(t_nbr **stack, t_nbr *elem);
 void	ft_add_front(t_nbr **stack, t_nbr *elem);
 void	ft_lstclear(t_nbr **stack);
-long int	ft_atoi(char *str);
 void	*ft_calloc(int size);
 void	push_swap(t_data *data, char **av, int ac);
 void	ft_init(t_data *data, char **av, int ac);
