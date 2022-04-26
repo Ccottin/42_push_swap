@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:46 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/13 21:09:01 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/26 15:28:36 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,22 @@ void	freeable(char **tab)
 	}
 	free(tab);
 }
-
+void	free_bean(t_nbr *stack)
+{
+	t_nbr	*temp;
+	
+	temp = stack;
+	while (temp != NULL)
+	{
+		if (temp->bin != NULL)
+			free(temp->bin);
+		temp = temp->next;
+	}
+}
 void	free_all(t_data *data)
 {
+	free_bean(data->stack_a);
+	free_bean(data->stack_b);
 	ft_lstclear(&(data->stack_a));
 	ft_lstclear(&(data->stack_b));
 	if (data->temp.move != NULL)

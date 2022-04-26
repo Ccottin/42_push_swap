@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:41 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/13 21:08:59 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/26 15:24:04 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	get_ord(t_data *data, t_nbr **comp)
 		tmp = tmp->next;
 	}
 	(*comp)->ord = sup;
+	(*comp)->bin = NULL;
 }
 
 void	ord_stacka(t_data *data)
@@ -37,6 +38,7 @@ void	ord_stacka(t_data *data)
 	total = 0;
 	while (tmp != NULL)
 	{
+		
 		get_ord(data, &tmp);
 		tmp = tmp->next;
 		total++;

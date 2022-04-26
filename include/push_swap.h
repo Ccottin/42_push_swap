@@ -8,6 +8,7 @@
 typedef struct s_nbr {
 	int		nb;
 	int		ord;
+	char		*bin;
 	struct s_nbr	*next;
 }			t_nbr;
 
@@ -51,6 +52,7 @@ void	rr(t_data *data);
 void	rra(t_data *data, int x);
 void	rrb(t_data *data, int x);
 void	rrr(t_data *data);
+void	radix_sort(t_data *data);
 void	quick_sort(t_data *data);
 void	bubble_sort(t_data *data);
 #endif
