@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:35:34 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/26 20:07:38 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/27 21:18:35 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_int(unsigned int nb)
 	}
 	return (ret);
 }
-
+/*binaire du nombre
 void	get_bin(t_data *data)
 {
 	int	temp;
@@ -42,6 +42,22 @@ void	get_bin(t_data *data)
 	while (tmp != NULL)
 	{
 		temp = tmp->nb;
+		tmp->bin = get_int(temp);
+		if (!tmp->bin)
+			c_error(data);
+		tmp = tmp->next;
+	}
+}*/
+
+void	get_bin(t_data *data)
+{
+	int	temp;
+	t_nbr	*tmp;
+
+	tmp = data->stack_a;
+	while (tmp != NULL)
+	{
+		temp = tmp->ord;
 		tmp->bin = get_int(temp);
 		if (!tmp->bin)
 			c_error(data);
@@ -72,33 +88,34 @@ void	ft_test(t_data *data)
 	printf("\n");
 }
 
-void	re_sort(t_data *data, int base, char c)
+int	thers_one(t_nbr *stack, int base)
 {
-	int	j;
-	int	total;
+	t_nbr	*temp;
 
-	total = ft_lstlen(data->stack_b);
-	j = 0;
-	while (j < total && data->stack_b != NULL)
+	temp = stack;
+	while (temp != NULL)
 	{
-		if (data->stack_b->bin[base] == c)
-			pa(data);
-		else
-			rb(data, 0);
-		j++;
+		if (temp->bin[base] == '1')
+			return (1);
+		temp = temp->next;
 	}
+	return (0);
 }
-
-void	sort2(t_data *data, int base, char c)
+void	push_to_b(t_data *data, int base)
 {
 	int	j;
 	int	total;
 
-	total = ft_lstlen(data->stack_a);
 	j = 0;
-	while (j < total)
+	total = ft_lstlen(data->stack_a);
+	while (j < total && thers_one(data->stack_a, base) == 1)
 	{
-		if (data->stack_a->bin[base] == c && data->stack_a->bin[base - 1] != c)
+		if (ft_lstlen(data->stack_a) == 2)
+		{
+			if (data->stack_a->ord < data->stack_a->next->ord)
+				sa(data, 0);
+		}
+		else if (data->stack_a->bin[base] == '0')
 			pb(data);
 		else
 			ra(data, 0);
@@ -106,89 +123,91 @@ void	sort2(t_data *data, int base, char c)
 	}
 }
 
-void	sort(t_data *data, int base, char c)
+int	check_pre_sorted(t_data *data)
 {
-	int	j;
-	int	total;
+	int	i;
+	int	start;
+	t_nbr	*temp;
 
-	total = ft_lstlen(data->stack_a);
-	j = 0;
-	while (j < total)
+	temp = data->stack_a;
+	start = 0;
+	while (temp->ord != 0)
 	{
-		if (data->stack_a->bin[base] == c && data->stack_a->bin[base - 1] == c)
-			pb(data);
-		else
-			ra(data, 0);
-		j++;
+		temp = temp->next;
+		start++;
 	}
+	i = 0;
+	while (i != data->total)
+	{
+		if (temp == NULL)
+			temp = data->stack_a;
+		if (i == temp->ord)
+		{
+			temp = temp->next;
+			i++;
+		}
+		else
+			return (0);
+	}
+	return (start);
 }
 
-void	last_sort(t_data *data, int base, char c)
+void	pre_sort(t_data *data, int start)
 {
-	int	j;
-	int	total;
-
-	total = ft_lstlen(data->stack_a);
-	j = 0;
-	while (j < total)
+	if (start > data->total / 2)
 	{
-		if (data->stack_a->bin[base] == c)
-			pb(data);
-		else
+		while (start != data->total)
+		{
+			rra(data, 0);
+			start++;
+		}
+	}
+	else
+	{
+		while (start != 0)
+		{
 			ra(data, 0);
-		j++;
+			start--;
+		}
 	}
 }
 
 void	radix_sort(t_data *data)
 {
-	int	i;
+	int	base;
+	int	total;
 
 	get_bin(data);
-	i = 31;
-	while (i != 1)
+	base = 31;
+	while (base != 0)
 	{
-		sort(data, i, '0');
-		sort2(data, i, '1');
-		sort2(data, i, '0');
+		push_to_b(data, base);
+		total = ft_lstlen(data->stack_b);
+		while (0 != total)
+		{
+		//	printf("char = %c, i = %d\n", data->stack_b->bin[base - 1], total);
+		//	if (data->stack_b->bin[base - 1] == '1')
+				pa(data);
+			total--;
+		}
 		ft_test(data);
-		i = i - 2;
-		while (data->stack_b != NULL)
-			pa(data);
+		base--;
+		total = check_pre_sorted(data);
+		if (total != 0)
+			pre_sort(data, total);
+		if (check_sorted(data) == 1)
+			return;
 	}
-	last_sort(data, 1, '0');
-	while (data->stack_b != NULL)
-			pa(data);
-	last_sort(data, 0, '1');
-	while (data->stack_b != NULL)
-			pa(data);
-	ft_test(data);
-
-}
-/*
-void	radix_sort(t_data *data)
-{
-	int	i;
-
-	get_bin(data);
-	i = 31;
-	while (i != 1)
+	base = 0;
+	total = ft_lstlen(data->stack_a);
+	while (base < total)
 	{
-		sort(data, i, '0');
-		sort2(data, i, '1');
-		sort(data, i - 1, '0');
-		re_sort(data, i - 1, '1');
-		re_sort(data, i - 1, '0');
-		i = i - 2;
-		while (data->stack_b != NULL)
-			pa(data);
+		if (data->stack_a->bin[0] == '1')
+			pb(data);
+		else
+			ra(data, 0);
+		base++;
 	}
-	sort(data, 1, '0');
 	while (data->stack_b != NULL)
-			pa(data);
-	sort(data, 0, '1');
-	while (data->stack_b != NULL)
-			pa(data);
-	ft_test(data);
-
-}*/
+		pa(data);
+}

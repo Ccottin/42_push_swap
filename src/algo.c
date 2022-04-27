@@ -6,82 +6,131 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:55:14 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/13 21:08:52 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:27:10 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-/*
-int	find_pivot(t_data *data)
-{
-	t_nbr	*pivot;
-	int	mid;
 
-	pivot = data->stack_a;
-	mid = data->total / 2;
-	while (pivot->ord != mid)
-		pivot = pivot->next;
-	return (pivot);
+//full optimisable
+
+void	compare(t_data *data, t_nbr *pivot, int big)
+{
+	if (pivot->ord == big)
+		return ;
+	printf("pivot = %d, data = %d\n", pivot->ord, data->stack_a->ord);
+	if (pivot->ord >= data->stack_a->ord)
+			pb(data);
+	else
+		ra(data, 0);
+		//raouter un trieur de b ici?
 }
 
-peut être = diviser en deux grosses stack pour les quick sort chacune individuellement, la a = gros chffre ordre décroissant et la b petit chiffre ordre décroissant, puis faire un pa jusqu'a ce que ce soit goode? autre idée = le mur est dans b et c le seul élément? en attendant ra
-*/
-
-void	quick_sort(t_data *data)
+t_nbr	*get_pivot(t_data *data, int max)
 {
-	int	pivot;
+	t_nbr	*temp;
 	int	i;
 
-	pivot = data->total / 2;
- 	i = 0;
-	while (i < data->total)
+	temp = data->stack_a;
+	i = 0;
+	while (temp->next != NULL && i < max - 1)
 	{
-		if (data->stack_a->ord < pivot)
-			pb(data);
-		else
-			ra(data, 0);
-	/*	if (data->stack_b->ord)
-		{
-			if (data->stack_a->ord > data->stack_a->next->ord && data->stack_b->ord < data->stack_b->next->ord)
-				ss(data);
-			else if (data->stack_a->ord > data->stack_a->next->ord)
-				sa(data, 0);
-			else if (data->stack_b->ord < data->stack_b->next->ord)
-			       sb(data, 0);
-		}*/
+		temp = temp->next;
 		i++;
 	}
-	t_nbr *temp = data->stack_a;
-	while (temp != NULL)
+	return (temp);
+}
+
+int	get_pivot_place(t_data *data, t_nbr *pivot)
+{
+	int	i;
+	t_nbr	*temp;
+
+	temp = data->stack_a;
+	while (temp != pivot)
 	{
-		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_test1(t_data *data)
+{
+	t_nbr *temp;
+
+	printf("\n");
+	printf("\n");
+	temp = data->stack_a;
+	while (temp != NULL)
+	{	
+		printf("A nb = %s ord = %d\n", temp->bin, temp->ord);
 		temp = temp->next;
 	}
+	printf("\n");
 	temp = data->stack_b;
 	while (temp != NULL)
 	{
-		printf("stakb nb = %d ord = %d\n", temp->nb, temp->ord);
+		printf("B nb = %s ord = %d\n", temp->bin, temp->ord);
 		temp = temp->next;
 	}
+	printf("\n");
+	printf("\n");
 }
-/*
-void	quick_sort_2(t_nbr *stack, int size)
-{
-	t_nbr	*wall;
-	int	i;
-	int	pivot;
 
-	pivot = size - 1;
-	wall = stack;
+int	check_biggest(t_data *data, int max)
+{
+	t_nbr	*temp;
+	int	ret;
+	int	i;
+
+	ret = 0;
+	temp = data->stack_a;
 	i = 0;
-	while (i < size)
+	while (i < max)
 	{
-		if (stack->nbr < pivot)
-		{
-			if (wall != stack)
-					
-		}
+		if (temp->ord > ret)
+			ret = temp->ord;
+		temp = temp->next;
+		i++;
 	}
-	quick_sort_2(stack, wall - 1);
-	quick_sort_2(stack + wall -1, size - wall + 1);
-}*/
+	return (ret);
+}
+
+void	quick_sort(t_data *data, int min, int max)
+{
+	t_nbr	*pivot;
+	int	big;
+	int	i;
+	
+	if (min < max)
+	{
+		printf("max = %d, ", max);
+		printf("min = %d\n", min);
+		pivot = get_pivot(data, max);
+		big = check_biggest(data, max);
+		printf("big = %d\n", big);
+		printf("pivot = %d\n", pivot->ord);
+		i = 0;
+		while (i != max - min)
+		{
+			compare(data, pivot, big);
+			i++;
+		}
+		i = 0;
+		ft_test1(data);
+		while (data->stack_b != NULL)
+		{
+			pa(data);
+			i++;
+		}
+		printf("i = %d\n", i);
+		ft_test1(data);
+		if (check_sorted(data) == 1)
+			return;
+		printf("avant r2cu = max = %d, ", max);
+		printf("min = %d\n", min);
+		quick_sort(data, min, i - 1);
+		quick_sort(data, max, data->total - max);
+	}
+}

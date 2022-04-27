@@ -27,8 +27,9 @@ typedef struct s_data {
 
 int	ft_strlen(char *str);
 int	ft_lstlen(t_nbr *list);
-long int	ft_atoi(char *str);
+int	check_sorted(t_data *data);
 int	check_arg(char **av, int m);
+long int	ft_atoi(char *str);
 char	**ft_split(char *s, char c);
 char	*stock_move(t_data *data, char *move);
 t_nbr	*ft_lstnew(int nb);
@@ -54,6 +55,6 @@ void	rra(t_data *data, int x);
 void	rrb(t_data *data, int x);
 void	rrr(t_data *data);
 void	radix_sort(t_data *data);
-void	quick_sort(t_data *data);
+void	quick_sort(t_data *data, int min, int max);
 void	bubble_sort(t_data *data);
 #endif
