@@ -15,15 +15,14 @@
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	**tab;
 
+	data.tab = NULL;
 	if (ac == 2)
 	{
-		tab = ft_split(av[1], ' ');
-		if (!tab)
+		data.tab = ft_split(av[1], ' ');
+		if (!data.tab)
 			exit(1);
-		check_arg(tab, 0);
-		freeable(tab);
+		check_arg(data.tab, 0);
 	}
 	else if (ac > 2)
 		check_arg(av, 1);

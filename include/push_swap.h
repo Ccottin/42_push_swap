@@ -19,6 +19,7 @@ typedef struct s_algo {
 
 typedef struct s_data {
 	int	total;
+	char	**tab;
 	t_nbr	*stack_a;
 	t_nbr	*stack_b;
 	t_algo	temp;

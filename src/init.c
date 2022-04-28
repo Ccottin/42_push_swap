@@ -72,14 +72,10 @@ void	ft_init(t_data *data, char **av, int ac)
 	t_nbr	*stack_b;
 
 	if (ac == 2)
-		av = ft_split(av[1], ' ');
-	if (av == NULL)
-		c_error(data);
+		av = data->tab;
 	stack_a = NULL;
 	data->stack_a = stack_a;
 	init_stack_a(data, av, ac);
-	if (ac == 2)
-		freeable(av);
 	stack_b = NULL;
 	data->stack_b = stack_b;
 	data->temp.nb_move = 0;
@@ -89,14 +85,3 @@ void	ft_init(t_data *data, char **av, int ac)
 	data->radix.move = NULL;
 	data->temp.move = NULL;
 }
-
-/*	il faut propriser un peut tout cela! et surtout gerer le tab, probablement le declarer a null dans le main et l incure dans ta structure pour pouvoir le free correctement en cas de crash + le reappeler dans init a 	
-
-t_nbr	*temp;
-	temp = data->stack_a;
-	while (temp != NULL)
-	{
-		printf("nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}*/
-

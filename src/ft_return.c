@@ -24,6 +24,7 @@ void	freeable(char **tab)
 	}
 	free(tab);
 }
+
 void	free_bean(t_nbr *stack)
 {
 	t_nbr	*temp;
@@ -48,6 +49,8 @@ void	free_all(t_data *data)
 		free(data->radix.move);
 	if (data->temp.move != NULL)
 		free(data->temp.move);
+	if (data->tab != NULL)
+		freeable(data->tab);
 }
 
 void	c_error(t_data *data)

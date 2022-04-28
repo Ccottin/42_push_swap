@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-//rajouter un \n entre chaque instruction
+
 char	*stock_move(t_data *data, char *move)
 {
 	int	i;

@@ -106,7 +106,10 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 	data->temp.nb_move = 0;
 	ft_lstclear(&(data->stack_a));
 	ft_lstclear(&(data->stack_b));
-	init_stack_a(data, av, ac);
+	if (ac == 2)
+		init_stack_a(data, data->tab, ac);
+	else
+		init_stack_a(data, av, ac);
 }
 
 void	push_swap(t_data *data, char **av, int ac)
