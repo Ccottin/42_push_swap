@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/27 20:57:05 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/28 17:26:10 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,46 +84,65 @@ void	sort_5(t_data *data)
 {
 	
 }*/
+void	check_proceed(t_data *data, int algo, char **av, int ac)
+{
+	if (check_sorted(data) == 1)
+	{
+		if (algo == 0)
+		{
+			data->bubble.move = ft_strdup(data->temp.move);
+			data->bubble.nb_move = data->temp.nb_move;
+		}
+		if (algo == 1)
+		{
+			data->radix.move = ft_strdup(data->temp.move);
+			data->radix.nb_move = data->temp.nb_move;
+			free_bean(data->stack_a);
+			free_bean(data->stack_b);
+		}
+	}
+	free(data->temp.move);
+	data->temp.move = NULL;
+	data->temp.nb_move = 0;
+	ft_lstclear(&(data->stack_a));
+	ft_lstclear(&(data->stack_b));
+	init_stack_a(data, av, ac);
+}
 
 void	push_swap(t_data *data, char **av, int ac)
 {
 	ft_init(data, av, ac);
-	t_nbr	*temp;
+/*	t_nbr	*temp;
 	temp = data->stack_a;
 	while (temp != NULL)
 	{
 		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 		temp = temp->next;
-	}
+	}*/
 	if (check_sorted(data) == 1)
 		end(data);
-	printf("total = %d\n", data->total);
+//	printf("total = %d\n", data->total);
 	if (data->total == 2)
 		sa(data, 0);
-	else if (data->total == 3)
-		sort_3(data);
-	else if (data->total == 4)
+//	else if (data->total == 3)
+//		sort_3(data);
+/*	else if (data->total == 4)
 		sort_4(data);
-//	quick_sort(data, 0, data->total);
-//	bubble_sort(data);
+*///	quick_sort(data, 0, data->total);
+	bubble_sort(data);
+	check_proceed(data, 0, av, ac);	
 	radix_sort(data);
-//	if (check_sorted(data) == 1)
-		printf("%d : %s\n", data->temp.nb_move, data->temp.move);
-//	t_nbr	*temp;	
-//	pb(data);
-//	pb(data);
-//	pb(data);
-//	pb(data);
-	temp = data->stack_a;
-	while (temp != NULL)
-	{
-		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
-	temp = data->stack_b;
-	while (temp != NULL)
-	{
-		printf("stakb nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
+	check_proceed(data, 1, av, ac);
+	//gerer les cas particuler)
+/*	if (data->radix.nb_move < data->bubble.nb_move)
+		printf("%d : radix : %s\n", data->radix.nb_move, data->radix.move);
+	else
+		printf("%d : bubble : %s\n", data->bubble.nb_move, data->bubble.move);
+		*/
+//	printf("%d, %d", data->radix.nb_move, data->bubble.nb_move);
+	if (data->radix.nb_move < data->bubble.nb_move)
+		printf("%s", data->radix.move);
+	else
+		printf("%s", data->bubble.move);
+
 }

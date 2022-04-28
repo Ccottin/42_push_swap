@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:35:34 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/27 21:18:35 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/28 16:56:56 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,24 +190,12 @@ void	radix_sort(t_data *data)
 				pa(data);
 			total--;
 		}
-		ft_test(data);
+	//	ft_test(data);
 		base--;
 		total = check_pre_sorted(data);
 		if (total != 0)
 			pre_sort(data, total);
 		if (check_sorted(data) == 1)
-			return;
+			return ;
 	}
-	base = 0;
-	total = ft_lstlen(data->stack_a);
-	while (base < total)
-	{
-		if (data->stack_a->bin[0] == '1')
-			pb(data);
-		else
-			ra(data, 0);
-		base++;
-	}
-	while (data->stack_b != NULL)
-		pa(data);
 }

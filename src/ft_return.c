@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:46 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/26 15:28:36 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/28 17:01:56 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	free_all(t_data *data)
 	free_bean(data->stack_b);
 	ft_lstclear(&(data->stack_a));
 	ft_lstclear(&(data->stack_b));
+	if (data->bubble.move != NULL)
+		free(data->bubble.move);
+	if (data->radix.move != NULL)
+		free(data->radix.move);
 	if (data->temp.move != NULL)
 		free(data->temp.move);
 }

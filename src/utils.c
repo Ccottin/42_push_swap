@@ -55,3 +55,20 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+char	*ft_strdup(char *s)
+{
+	char	*ret;
+	size_t	i;
+
+	ret = ft_calloc(ft_strlen(s) + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		ret[i] = s[i];
+		i++;
+	}
+	return (ret);
+}

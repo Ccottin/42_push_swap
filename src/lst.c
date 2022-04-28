@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:56:49 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/26 19:50:22 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/28 16:38:02 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	ft_lstclear(t_nbr **stack)
 		temp->next = NULL;
 		free(temp);
 	}
+	*stack = NULL;
 }

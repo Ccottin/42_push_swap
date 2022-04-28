@@ -71,7 +71,6 @@ int	check_ord(t_data *data)
 		temp = temp->next;
 	}
 	i++;
-	printf("i = %d, total = %d \n", i, data->total);
 	if (i == data->total)
 		return (1);
 	return (0);
@@ -88,17 +87,11 @@ void	check_last(t_data *data)
 		ra(data, 0);
 }
 
-void	bubble_sort(t_data *data)
+void	ft_test2(t_data *data)
 {
-	t_nbr	*small;
-	int	move;
-	int	i;
 	t_nbr	*temp;
-	i = 0;
-	while (check_ord(data) != 1 && i < data->total)
-	{
-		temp = data->stack_a;
-		while (temp != NULL)
+
+	while (temp != NULL)
 		{
 			printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 			temp = temp->next;
@@ -109,7 +102,17 @@ void	bubble_sort(t_data *data)
 			printf("stakb nb = %d ord = %d\n", temp->nb, temp->ord);
 			temp = temp->next;
 		}
-		printf("i = repere = %d,i list = %s\n", i, data->temp.move);
+}
+
+void	bubble_sort(t_data *data)
+{
+	t_nbr	*small;
+	int	move;
+	int	i;
+	
+	i = 0;
+	while (check_ord(data) != 1 && i < data->total)
+	{
 		small = find_small(data->stack_a, i);
 		move = count_move(data->stack_a, i);
 		if (move > 0)

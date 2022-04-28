@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:41 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/26 15:24:04 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/28 16:36:20 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ord_stacka(t_data *data)
 	total = 0;
 	while (tmp != NULL)
 	{
-		
 		get_ord(data, &tmp);
 		tmp = tmp->next;
 		total++;
@@ -64,6 +63,7 @@ void	init_stack_a(t_data *data, char **av, int ac)
 		ft_add_back(&(data->stack_a), temp);
 		i++;
 	}
+	ord_stacka(data);
 }
 
 void	ft_init(t_data *data, char **av, int ac)
@@ -80,14 +80,19 @@ void	ft_init(t_data *data, char **av, int ac)
 	init_stack_a(data, av, ac);
 	if (ac == 2)
 		freeable(av);
-	ord_stacka(data);
 	stack_b = NULL;
 	data->stack_b = stack_b;
 	data->temp.nb_move = 0;
+	data->bubble.nb_move = 0;
+	data->radix.nb_move = 0;
+	data->bubble.move = NULL;
+	data->radix.move = NULL;
 	data->temp.move = NULL;
 }
 
-/*	t_nbr	*temp;
+/*	il faut propriser un peut tout cela! et surtout gerer le tab, probablement le declarer a null dans le main et l incure dans ta structure pour pouvoir le free correctement en cas de crash + le reappeler dans init a 	
+
+t_nbr	*temp;
 	temp = data->stack_a;
 	while (temp != NULL)
 	{
