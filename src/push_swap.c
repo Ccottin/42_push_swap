@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/28 17:26:10 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/30 18:45:27 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,12 @@ void	push_swap(t_data *data, char **av, int ac)
 	//	check_proceed(data, 0, av, ac);	
 	//	radix_sort(data);
 	//	check_proceed(data, 1, av, ac);
-		quick_sort(data, 0, data->total);
-		check_proceed(data, 2, av, ac);
+//		quick_sort(data, 0, data->total);
+//		check_proceed(data, 2, av, ac);
+		algo(data);
 	}
 //	comp_algo(data);
-	printf("%d : quick : %s\n", data->quick.nb_move, data->quick.move);
+	printf("%d : quick : %s\n", data->temp.nb_move, data->temp.move);
 //	//gerer les cas particuler)
 /*	if (data->radix.nb_move < data->bubble.nb_move)
 		printf("%d : radix : %s\n", data->radix.nb_move, data->radix.move);

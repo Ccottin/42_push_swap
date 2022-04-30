@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:55:14 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/27 19:27:10 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/04/30 18:19:21 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	is_sorted(t_data *data, int min)
 		ret++;
 	}
 	ret = 0;
-	while (temp->ord < temp->next->ord)
+	while (temp->next && temp->ord < temp->next->ord)
 	{
 		temp = temp->next;
 		ret++;
@@ -140,7 +140,7 @@ void	quick_sort(t_data *data, int min, int max)
 
 	
 //	printf("avant r2cu = min = %d max = %d\n", min , max);
-	if (min < max && is_sorted(data, min) <= max - 1)
+	if (min < max && is_sorted(data, min) <= max - 2)
 	{
 		printf("max = %d\n", max);
 		printf("min = %d\n", min);	
