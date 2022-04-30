@@ -100,6 +100,11 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 			free_bean(data->stack_a);
 			free_bean(data->stack_b);
 		}
+		if (algo == 2)
+		{
+			data->quick.move = ft_strdup(data->temp.move);
+			data->quick.nb_move = data->temp.nb_move;
+		}
 	}
 	free(data->temp.move);
 	data->temp.move = NULL;
@@ -111,41 +116,52 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 	else
 		init_stack_a(data, av, ac);
 }
+/*
+void	comp_algo(t_data *data)
+{
+	if (data->temp.move != NULL)
+	
+}*/
 
 void	push_swap(t_data *data, char **av, int ac)
 {
 	ft_init(data, av, ac);
-/*	t_nbr	*temp;
+	t_nbr	*temp;
 	temp = data->stack_a;
 	while (temp != NULL)
 	{
 		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 		temp = temp->next;
-	}*/
+	}
 	if (check_sorted(data) == 1)
 		end(data);
 //	printf("total = %d\n", data->total);
 	if (data->total == 2)
 		sa(data, 0);
-//	else if (data->total == 3)
-//		sort_3(data);
-/*	else if (data->total == 4)
-		sort_4(data);
-*///	quick_sort(data, 0, data->total);
-	bubble_sort(data);
-	check_proceed(data, 0, av, ac);	
-	radix_sort(data);
-	check_proceed(data, 1, av, ac);
-	//gerer les cas particuler)
+	else if (data->total == 3)
+		sort_3(data);
+//	else if (data->total == 4)
+//		sort_4(data);faire bcp de test et comp si un algo peut être en desssous de ce nb de move & si tel est le cas on avise
+	else
+	{
+	//	bubble_sort(data);
+	//	check_proceed(data, 0, av, ac);	
+	//	radix_sort(data);
+	//	check_proceed(data, 1, av, ac);
+		quick_sort(data, 0, data->total);
+		check_proceed(data, 2, av, ac);
+	}
+//	comp_algo(data);
+	printf("%d : quick : %s\n", data->quick.nb_move, data->quick.move);
+//	//gerer les cas particuler)
 /*	if (data->radix.nb_move < data->bubble.nb_move)
 		printf("%d : radix : %s\n", data->radix.nb_move, data->radix.move);
 	else
 		printf("%d : bubble : %s\n", data->bubble.nb_move, data->bubble.move);
 		*/
 //	printf("%d, %d", data->radix.nb_move, data->bubble.nb_move);
-	if (data->radix.nb_move < data->bubble.nb_move)
+/*	if (data->radix.nb_move < data->bubble.nb_move)
 		printf("%s", data->radix.move);
 	else
-		printf("%s", data->bubble.move);
-
+		printf("%s", data->bubble.move);*/
 }

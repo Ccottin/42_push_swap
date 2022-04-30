@@ -81,6 +81,8 @@ void	ft_init(t_data *data, char **av, int ac)
 	data->temp.nb_move = 0;
 	data->bubble.nb_move = 0;
 	data->radix.nb_move = 0;
+	data->quick.nb_move = 0;
+	data->quick.move = NULL;
 	data->bubble.move = NULL;
 	data->radix.move = NULL;
 	data->temp.move = NULL;

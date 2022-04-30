@@ -18,7 +18,8 @@ char	*stock_move(t_data *data, char *move)
 	int	j;
 	char	*ret;
 
-	ret = ft_calloc(ft_strlen(data->temp.move) + ft_strlen(move) + 2);
+	printf("%s\n", move);
+	ret = ft_calloc(ft_strlen(data->temp.move) + ft_strlen(move) + 1);
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -37,7 +38,7 @@ char	*stock_move(t_data *data, char *move)
 		j++;
 		i++;
 	}
-	ret[i] = '\n';
+//	ret[i] = '\n';
 	if (data->temp.move != NULL)
 		free(data->temp.move);
 	return (ret);

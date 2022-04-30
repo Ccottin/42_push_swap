@@ -25,6 +25,7 @@ typedef struct s_data {
 	t_algo	temp;
 	t_algo	bubble;
 	t_algo	radix;
+	t_algo	quick;
 }		t_data;
 
 
@@ -63,4 +64,5 @@ void	rrr(t_data *data);
 void	radix_sort(t_data *data);
 void	quick_sort(t_data *data, int min, int max);
 void	bubble_sort(t_data *data);
+
 #endif
