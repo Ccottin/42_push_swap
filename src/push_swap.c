@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/30 18:45:27 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/01 18:11:12 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ void	push_swap(t_data *data, char **av, int ac)
 	//	check_proceed(data, 1, av, ac);
 //		quick_sort(data, 0, data->total);
 //		check_proceed(data, 2, av, ac);
-		algo(data);
+//		algo(data);
+		truc(data);
 	}
 //	comp_algo(data);
 	printf("%d : quick : %s\n", data->temp.nb_move, data->temp.move);

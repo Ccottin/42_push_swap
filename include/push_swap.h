@@ -65,5 +65,8 @@ void	radix_sort(t_data *data);
 void	quick_sort(t_data *data, int min, int max);
 void	bubble_sort(t_data *data);
 void	algo(t_data *data);
+void	truc(t_data *data);
+void	ft_1(t_data *data, int move);
+void	ft_2(t_data *data, int move);
 
 #endif
