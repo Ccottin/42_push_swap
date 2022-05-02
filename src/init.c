@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:41 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/28 16:36:20 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/02 15:47:55 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	ft_init(t_data *data, char **av, int ac)
 	data->temp.nb_move = 0;
 	data->bubble.nb_move = 0;
 	data->radix.nb_move = 0;
-	data->quick.nb_move = 0;
-	data->quick.move = NULL;
+	data->truc.nb_move = 0;
+	data->truc.move = NULL;
 	data->bubble.move = NULL;
 	data->radix.move = NULL;
 	data->temp.move = NULL;

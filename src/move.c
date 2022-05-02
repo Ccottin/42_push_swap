@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:23 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/28 17:17:34 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/02 14:33:55 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ char	*stock_move(t_data *data, char *move)
 	int	j;
 	char	*ret;
 
-	printf("%s\n", move);
-	ret = ft_calloc(ft_strlen(data->temp.move) + ft_strlen(move) + 1);
+	ret = ft_calloc(ft_strlen(data->temp.move) + ft_strlen(move) + 2);
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -38,7 +37,7 @@ char	*stock_move(t_data *data, char *move)
 		j++;
 		i++;
 	}
-//	ret[i] = '\n';
+	ret[i] = '\n';
 	if (data->temp.move != NULL)
 		free(data->temp.move);
 	return (ret);

@@ -6,32 +6,11 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 17:31:57 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/01 21:37:24 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/02 15:55:34 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-void	ft_testc(t_data *data)
-{
-	t_nbr *temp;
-
-	printf("\n");
-	printf("\n");
-	temp = data->stack_a;
-	while (temp != NULL)
-	{	
-		printf("A nb = %s ord = %d\n", temp->bin, temp->ord);
-		temp = temp->next;
-	}
-	printf("\n");
-	temp = data->stack_b;
-	while (temp != NULL)
-	{
-		printf("B nb = %s ord = %d\n", temp->bin, temp->ord);
-		temp = temp->next;
-	}
-}
 
 int	get_last(t_nbr *stack)
 {
@@ -39,6 +18,16 @@ int	get_last(t_nbr *stack)
 
 	temp = stack;
 	while (temp->next != NULL)
+		temp = temp->next;
+	return (temp->ord);
+}
+
+int	get_s_last(t_nbr *stack)
+{
+	t_nbr	*temp;
+
+	temp = stack;
+	while (temp->next->next != NULL)
 		temp = temp->next;
 	return (temp->ord);
 }
@@ -74,6 +63,8 @@ int	phase_two(t_data *data, int max)
 		else
 			ra(data, 0);
 	}
+	if (data->stack_a->ord < max)
+		pb(data);
 	return (i);
 }
 
@@ -83,91 +74,9 @@ int	check_elem(t_nbr *b, int max)
 		return (1);
 	return (0);
 }
-/*
-int	get_closest(t_nbr *stack, int len, int top, int bot)
-{
-	t_nbr	*temp;
-	int	i;
-	int	j;
 
-	temp = stack;
-	i = 0;
-	while (temp->ord != top)
-	{
-		temp = temp->next;
-		i++;
-	}
-	j = i;
-	while (temp->ord != bot)
-	{
-		temp = temp->next;
-		j++;
-	}
-	j = len - j;
-	if (j < i)
-		return (-j);
-	else
-		return (i);
-}
-
-int	find_closest(t_nbr *stack, int max, int s)
-{
-	t_nbr	*temp;
-	int	ref;
-	int	i;
-	int	j;
-
-	ref = stack->ord;
-	temp = stack;
-	i = 0;
-	while (i == 0)
-	{
-		if (temp->ord > ref - max / 6 && temp->ord < ref + max / 6 && s < 0)
-		
-			i = temp->ord;
-		s--;
-		temp = temp->next;
-	}
-	while (temp != NULL)
-	 {
-		if (temp->ord > ref - max / 6 && temp->ord < ref + max / 6)
-			j = temp->ord;
-		temp = temp->next;
-	 }
-	 return (get_closest(stack , ft_lstlen(stack), i, j));
-}
-
-void	phase_three(t_data *data, int max)
-{
-	int	move;
-	int	i;
-
-	i = 1;
-	while (sorted(data->stack_a) != -1)
-	{
-		move = find_closest(data->stack_a, max, i);
-		if (move > 0)
-			ft_1(data, move);
-		else if (move < 0)
-			ft_2(data, move);
-		ft_testc(data);
-	}
-	printf("move = %d\n", move);
-}
-*/
 void	rotate_t_t(t_data *data, int top, int max)
 {
-/*	int	bot;
-	t_nbr	*temp;
-
-	temp = data->stack_b;
-	bot = 0;
-	while (temp != NULL)
-	{
-		if (temp->ord < max)
-			bot++;
-		temp = temp->next;
-	}*/
 	(void)top;
 	while (data->stack_b->ord < max)
 		rb(data, 0);
@@ -264,7 +173,7 @@ int	do_rra(t_data *data, int small)
 	return (move);
 }
 //on peut opti en effectuant un petit tri de stack_a
-void	re_phase_three(t_data *data)
+void	phase_three(t_data *data)
 {
 	int	small;
 	int	move;
@@ -375,24 +284,67 @@ void	check_ss(t_data *data)
 		sa(data, 0);
 }
 
+void	put_biggest(t_data *data)
+{
+	if (data->stack_a->next->ord > data->stack_a->ord - 2)
+		check_ss(data);
+	if (get_last(data->stack_a) == data->total - 1)
+		rra(data, 0);
+	if (get_s_last(data->stack_a) == data->total - 1)
+	{
+		rra(data,0);
+		rra(data,0);
+		check_ss(data);
+	}
+	if (data->stack_b->ord == data->total - 1)
+		pa(data);
+}
+
 void	phase_five(t_data *data, int size)
 {
-	int	last_a;
-		int i = 0;
+	int	i;
+
+	i = 0;
 	while (data->stack_b->ord > size)
 	{
-		i++;
-		printf("\n\nca passe %d\n", i);
-		ft_testc(data);
-		check_ss(data);
-		last_a = get_last(data->stack_a);//go fix ton insertion
-		while (data->stack_a->ord < data->stack_b->ord )
+		if (i == 0)
+			put_biggest(data);
+		if (data->stack_a->ord - 1 == get_last(data->stack_a)
+		|| data->stack_a->ord - 1 == get_s_last(data->stack_a))
 		{
-			printf("%d, %d\n", data->stack_b->ord, last_a - 1);
 			rra(data, 0);
-			last_a = get_last(data->stack_a);
+			if (data->stack_a->ord + 1 == get_last(data->stack_a))
+				rra(data, 0);
 		}
-		pa(data);
+		if (data->stack_a->next->ord > data->stack_a->ord - 2)
+			check_ss(data);
+		if (data->stack_a->ord - 1 == data->stack_b->ord || data->stack_a->ord - 1 == data->stack_b->next->ord)
+		{
+			pa(data);
+			if (data->stack_a->ord + 1 == data->stack_b->ord)
+				pa(data);
+		}
+		i++;
+	}
+}
+
+void	phase_six(t_data *data)
+{
+	int	big;
+
+	while (get_last(data->stack_a) != data->total - 1)
+	{
+		check_ss(data);
+		rra(data, 0);
+	}
+	while (data->stack_b != NULL)
+	{
+		big = find_biggest(data->stack_b);
+		if (count_move(data->stack_b, big) < 0)
+			do_rrb(data, big);
+		else
+			do_rb(data, big);
+		check_ss(data);
 	}
 }
 
@@ -412,11 +364,8 @@ void	truc(t_data *data)
 	}
 	i = phase_two(data, size);
 	rotate_t_t(data, i, size);
-	ft_testc(data);
-	//phase_three(data, size);
-	re_phase_three(data);
+	phase_three(data);
 	phase_four(data, size);
-	ft_testc(data);
 	phase_five(data, size);
-	ft_testc(data);
+	phase_six(data);
 }

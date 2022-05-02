@@ -25,7 +25,7 @@ typedef struct s_data {
 	t_algo	temp;
 	t_algo	bubble;
 	t_algo	radix;
-	t_algo	quick;
+	t_algo	truc;
 }		t_data;
 
 
@@ -42,7 +42,6 @@ void	end(t_data *data);
 void	freeable(char **tab);
 void	c_error(t_data *data);
 void	free_all(t_data *data);
-void	free_bean(t_nbr *stack);
 void	ft_add_back(t_nbr **stack, t_nbr *elem);
 void	ft_add_front(t_nbr **stack, t_nbr *elem);
 void	ft_lstclear(t_nbr **stack);
@@ -62,11 +61,7 @@ void	rra(t_data *data, int x);
 void	rrb(t_data *data, int x);
 void	rrr(t_data *data);
 void	radix_sort(t_data *data);
-void	quick_sort(t_data *data, int min, int max);
 void	bubble_sort(t_data *data);
-void	algo(t_data *data);
 void	truc(t_data *data);
-void	ft_1(t_data *data, int move);
-void	ft_2(t_data *data, int move);
 
 #endif
