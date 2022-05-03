@@ -26,6 +26,7 @@ void	get_ord(t_data *data, t_nbr **comp)
 		tmp = tmp->next;
 	}
 	(*comp)->ord = sup;
+	(*comp)->tp_ord = 0;
 	(*comp)->bin = NULL;
 }
 

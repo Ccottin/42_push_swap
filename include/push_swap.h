@@ -8,6 +8,7 @@
 typedef struct s_nbr {
 	int		nb;
 	int		ord;
+	int		tp_ord;
 	char		*bin;
 	struct s_nbr	*next;
 }			t_nbr;
@@ -42,6 +43,7 @@ void	end(t_data *data);
 void	freeable(char **tab);
 void	c_error(t_data *data);
 void	free_all(t_data *data);
+void	free_bean(t_nbr *stack);
 void	ft_add_back(t_nbr **stack, t_nbr *elem);
 void	ft_add_front(t_nbr **stack, t_nbr *elem);
 void	ft_lstclear(t_nbr **stack);
@@ -63,5 +65,10 @@ void	rrr(t_data *data);
 void	radix_sort(t_data *data);
 void	bubble_sort(t_data *data);
 void	truc(t_data *data);
+int	find_biggest(t_nbr *stack);
+int	find_smallest(t_nbr *stack);
+int	count_move(t_nbr *stack, int rank);
+void	sort_5(t_data *data);
+void	get_temp_ord(t_nbr *stack);
 
 #endif

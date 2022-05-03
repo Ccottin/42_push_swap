@@ -45,8 +45,8 @@ void	free_all(t_data *data)
 	ft_lstclear(&(data->stack_b));
 	if (data->bubble.move != NULL)
 		free(data->bubble.move);
-	if (data->quick.move != NULL)
-		free(data->quick.move);
+	if (data->truc.move != NULL)
+		free(data->truc.move);
 	if (data->radix.move != NULL)
 		free(data->radix.move);
 	if (data->temp.move != NULL)

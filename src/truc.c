@@ -82,41 +82,6 @@ void	rotate_t_t(t_data *data, int top, int max)
 		rb(data, 0);
 }
 
-int	count_move(t_nbr *stack, int rank)
-{
-	int	i;
-	int	total;
-	t_nbr	*temp;
-
-	i = 0;
-	total = ft_lstlen(stack);
-	temp = stack;
-	while (temp->ord != rank)
-	{
-		temp = temp->next;
-		i++;
-	}
-	if (i > total / 2)
-		return (i - total - 1);
-	return (i);
-}
-
-int	find_smallest(t_nbr *stack)
-{
-	t_nbr	*temp;
-	int	small;
-
-	temp = stack;
-	small = 2147483647;
-	while (temp != NULL)
-	{
-		if (small > temp->ord)
-			small = temp->ord;
-		temp = temp->next;
-	}
-	return (small);
-}
-
 int	sorted(t_nbr *stack)
 {
 	int	i;
@@ -229,23 +194,6 @@ int	do_rrb(t_data *data, int big)
 	}
 	pa(data);
 	return (move);
-}
-
-int	find_biggest(t_nbr *stack)
-{
-	t_nbr	*temp;
-	int	big;
-
-	temp = stack;
-	big = 0;
-	while (temp != NULL)
-	{
-		if (big < temp->ord)
-			big = temp->ord;
-		temp = temp->next;
-	}
-	return (big);
-
 }
 
 void	phase_four(t_data *data, int size)

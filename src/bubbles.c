@@ -9,32 +9,8 @@
 /*   Updated: 2022/05/02 15:37:58 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../include/push_swap.h"
-
-int	count_move(t_nbr *stack, int rank)
-{
-	int	i;
-	int	total;
-	t_nbr	*temp;
-
-	i = 0;
-	total = 0;
-	temp = stack;
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-		total++;
-	}
-	temp = stack;
-	while (temp->ord != rank)
-	{
-		temp = temp->next;
-		i++;
-	}
-	if (i > total / 2)
-		return (i - total - 1);
-	return (i);
-}
 
 t_nbr	*find_small(t_nbr *stack, int small)
 {

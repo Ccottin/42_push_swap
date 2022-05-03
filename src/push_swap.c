@@ -28,61 +28,77 @@ int	check_sorted(t_data *data)
 		return (1);
 	return (0);
 }
-//sort3 a modifier pour qu il soit adaptable a d autres bails -> 4 et 5 et 6 vu que 6/2 == 3 a voir sion fait des temp ord? 
-void	sort_3(t_data *data)
+//sort3 a modifier pour qu il soit adaptable a d autres bails -> 4 et 5 et 6 vu que 6/2 == 3 a voir sion fait des temp ord?
+void	get_tmp_ord(t_nbr *stack, t_nbr **comp)
 {
-	if (data->stack_a->ord == 0)
+	t_nbr	*tmp;
+	int	sup;
+
+	tmp = stack;
+	sup = 0;
+	while (tmp != NULL)
 	{
-		rra(data, 0);
-		sa(data, 0);
+		if (tmp->nb < (*comp)->nb)
+			sup++;
+		tmp = tmp->next;
 	}
-	else if (data->stack_a->ord == 2 && data->stack_a->next->ord == 1)
-	{
-		ra(data, 0);
-		sa(data, 0);
-	}
-	else if (data->stack_a->ord == 2 && data->stack_a->next->ord == 0)
-		ra(data, 0);
-	else if (data->stack_a->ord == 1 && data->stack_a->next->ord == 0)
-		sa(data, 0);
-	else if (data->stack_a->ord == 1 && data->stack_a->next->ord == 2)
-		rra(data, 0);
+	(*comp)->tp_ord = sup;
 }
 
-/*pire cas ici = 3 4 2 1 il fait en tout 7 coups
- * en moyenne 6*/
+void	get_temp_ord(t_nbr *stack)
+{
+	t_nbr	*temp;
+	
+	temp = stack;
+	while (temp != NULL)
+	{
+		get_tmp_ord(stack, &temp);
+		temp = temp->next;
+	}
+}
+
+void	sort_3(t_data *data)
+{
+	get_temp_ord(data->stack_a);
+	if (data->stack_a->tp_ord == 0)
+	{
+		rra(data, 0);
+		sa(data, 0);
+	}
+	else if (data->stack_a->tp_ord == 2 && data->stack_a->next->tp_ord == 1)
+	{
+		ra(data, 0);
+		sa(data, 0);
+	}
+	else if (data->stack_a->tp_ord == 2 && data->stack_a->next->tp_ord == 0)
+		ra(data, 0);
+	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 0)
+		sa(data, 0);
+	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 2)
+		rra(data, 0);
+}
 
 void	sort_4(t_data *data)
 {
-	int	i;
+	int	small;
 
-	i = 0;
-	while (i < 2)
+	get_temp_ord(data->stack_a);
+	small = find_smallest(data->stack_a);
+	if (count_move(data->stack_a, small) < 0)
 	{
-		if  (data->stack_a->ord == 0 || data->stack_a->ord == 1)
-		{
-			pb(data);
-			i++;
-		}
-		else
+		while (data->stack_a->ord != small)
+			rra(data, 0);
+	}
+	else
+	{
+		while (data->stack_a->ord != small)
 			ra(data, 0);
 	}
-	if (data->stack_a->ord > data->stack_a->next->ord
-		&& data->stack_b->ord < data->stack_b->next->ord)
-		ss(data);
-	else if (data->stack_a->ord > data->stack_a->next->ord)
-		sa(data, 0);
-	else if (data->stack_b->ord < data->stack_b->next->ord)
-	       sb(data, 0);
+	pb(data);
+	sort_3(data);
 	pa(data);
-	pa(data);
-
 }
-/*
-void	sort_5(t_data *data)
-{
-	
-}*/
+
 void	check_proceed(t_data *data, int algo, char **av, int ac)
 {
 	if (check_sorted(data) == 1)
@@ -131,8 +147,10 @@ void	push_swap(t_data *data, char **av, int ac)
 		sa(data, 0);
 	else if (data->total == 3)
 		sort_3(data);
-//	else if (data->total == 4)
-//		sort_4(data);faire bcp de test et comp si un algo peut être en desssous de ce nb de move & si tel est le cas on avise
+	else if (data->total == 4)
+		sort_4(data);
+	else if (data->total == 5)
+		sort_5(data);
 	else
 	{
 		bubble_sort(data);
@@ -144,12 +162,12 @@ void	push_swap(t_data *data, char **av, int ac)
 	}
 //	comp_algo(data);
 	printf("%s", data->temp.move);
-/*	t_nbr	*temp;
+	t_nbr	*temp;
 	temp = data->stack_a;
 	while (temp != NULL)
 	{
 		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
 		temp = temp->next;
-	}*/
+	}
 
 }
