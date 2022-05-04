@@ -28,6 +28,7 @@ int	ultimate_check_sorted(t_data *data)
 		return (1);
 	return (0);
 }
+
 void	proceed(t_data *data, char **av, int ac)
 {
 	free(data->temp.move);
@@ -68,25 +69,8 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 			data->truc.move = ft_strdup(data->temp.move);
 			data->truc.nb_move = data->temp.nb_move;
 		}
-		proceed(data, av, ac);
 	}
-}
-
-void	ft_testeee(t_data *data)
-{
-	t_nbr	*temp;
-	temp = data->stack_a;
-	while (temp != NULL)
-	{
-		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
-	temp = data->stack_b;
-	while (temp != NULL)
-	{
-		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
+	proceed(data, av, ac);
 }
 
 t_algo	*comp_algo(t_data *data)
@@ -108,6 +92,24 @@ t_algo	*comp_algo(t_data *data)
 	return (min);
 }
 
+void	ft_testee(t_data *data)
+{
+	t_nbr	*temp;
+	temp = data->stack_a;
+	while (temp != NULL)
+	{
+		printf("A = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
+	temp = data->stack_b;
+	while (temp != NULL)
+	{
+		printf("B = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
+	printf("\n");
+}
+
 void	push_swap(t_data *data, char **av, int ac)
 {
 	t_algo	*res;
@@ -125,7 +127,7 @@ void	push_swap(t_data *data, char **av, int ac)
 		sort_5(data);
 	else if (data->total == 6)
 		sort_6(data);
-	check_proceed(data, 4, av, ac);	
+	check_proceed(data, 4, av, ac);
 	if (data->total >= 6)
 	{
 		bubble_sort(data);
@@ -138,7 +140,7 @@ void	push_swap(t_data *data, char **av, int ac)
 		check_proceed(data, 2, av, ac);
 	}
 	res = comp_algo(data);
-	printf("%s", res->move);
-	printf("%d\n%s", res->nb_move, res->move);
-	printf("truc %d, radix %d, bubble %d small %d\n", data->truc.nb_move, data->radix.nb_move, data->bubble.nb_move, data->small.nb_move);
+	write(1, res->move, ft_strlen(res->move));
+/*	printf("%d\n%s", res->nb_move, res->move);
+	printf("truc %d, radix %d, bubble %d small %d\n", data->truc.nb_move, data->radix.nb_move, data->bubble.nb_move, data->small.nb_move);*/
 }

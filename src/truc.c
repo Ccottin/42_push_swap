@@ -137,7 +137,7 @@ int	do_rra(t_data *data, int small)
 	pb(data);
 	return (move);
 }
-//on peut opti en effectuant un petit tri de stack_a
+
 void	phase_three(t_data *data)
 {
 	int	small;

@@ -12,6 +12,11 @@
 
 #include "../include/push_swap.h"
 
+//refaire le checker = on verifie si il y a des espaces à partir du moment ou il y a un chiffre. si il y a 
+//encore un espace, c'est un nouveau chiffre.  ensuite tu renvoies un joli tableau tout propre stp.
+// on malloc tout donc il sera freeable
+peut être ratacher le error au reste
+
 void	error(int err, t_nbr *stack_a)
 {
 	write(2, "Error\n", 6);
@@ -89,6 +94,18 @@ int	check_arg(char **av, int m)
 		i++;
 	if (i < 2)
 	{
+		i = check_char(av[0]);
+		if (i == -1)
+		{
+			freeable(av);
+			error(i, stack_a);
+		}
+		i = check_nbr(stack_a, ft_atoi(av[0]));
+		if (i == -1)
+		{
+			freeable(av);
+			error(i, stack_a);
+		}
 		freeable(av);
 		exit(0);
 	}

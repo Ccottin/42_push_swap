@@ -32,17 +32,20 @@ void	sort_3_b(t_data *data)
 	if (data->stack_b->tp_ord == 2)
 	{
 		rrb(data, 0);
-		rrb(data, 0);
+		sb(data, 0);
 	}
 	else if (data->stack_a->tp_ord == 0 && data->stack_a->next->tp_ord == 1)
-		rb(data, 0);
-	else if (data->stack_a->tp_ord == 0 && data->stack_a->next->tp_ord == 2)
-		rb(data, 0);
-	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 2)
 	{
+		rb(data, 0);
 		sb(data, 0);
+	}
+	else if (data->stack_a->tp_ord == 0 && data->stack_a->next->tp_ord == 2)
+	{
+		rrb(data, 0);
 		rrb(data, 0);
 	}
+	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 2)
+		sb(data, 0);
 	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 0)
 		rrb(data, 0);
 }
@@ -85,7 +88,7 @@ void	fill_b(t_data *data, int len)
 	{
 		while (data->stack_a->ord != small)
 		{
-			if (len == 2 && data->stack_a->ord == small + 1)
+			if (len == 1 && data->stack_a->ord == small + 1)
 				pb(data);
 			rra(data, 0);
 		}
@@ -95,7 +98,7 @@ void	fill_b(t_data *data, int len)
 	{
 		while (data->stack_a->ord != small)
 		{
-			if (len == 2 && data->stack_a->ord == small + 1)
+			if (len == 1 && data->stack_a->ord == small + 1)
 				pb(data);
 			ra(data, 0);
 		}
