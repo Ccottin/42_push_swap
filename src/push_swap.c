@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-int	check_sorted(t_data *data)
+int	ultimate_check_sorted(t_data *data)
 {
 	t_nbr	*temp;
 	int	i;
@@ -28,81 +28,29 @@ int	check_sorted(t_data *data)
 		return (1);
 	return (0);
 }
-//sort3 a modifier pour qu il soit adaptable a d autres bails -> 4 et 5 et 6 vu que 6/2 == 3 a voir sion fait des temp ord?
-void	get_tmp_ord(t_nbr *stack, t_nbr **comp)
+void	proceed(t_data *data, char **av, int ac)
 {
-	t_nbr	*tmp;
-	int	sup;
-
-	tmp = stack;
-	sup = 0;
-	while (tmp != NULL)
-	{
-		if (tmp->nb < (*comp)->nb)
-			sup++;
-		tmp = tmp->next;
-	}
-	(*comp)->tp_ord = sup;
-}
-
-void	get_temp_ord(t_nbr *stack)
-{
-	t_nbr	*temp;
-	
-	temp = stack;
-	while (temp != NULL)
-	{
-		get_tmp_ord(stack, &temp);
-		temp = temp->next;
-	}
-}
-
-void	sort_3(t_data *data)
-{
-	get_temp_ord(data->stack_a);
-	if (data->stack_a->tp_ord == 0)
-	{
-		rra(data, 0);
-		sa(data, 0);
-	}
-	else if (data->stack_a->tp_ord == 2 && data->stack_a->next->tp_ord == 1)
-	{
-		ra(data, 0);
-		sa(data, 0);
-	}
-	else if (data->stack_a->tp_ord == 2 && data->stack_a->next->tp_ord == 0)
-		ra(data, 0);
-	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 0)
-		sa(data, 0);
-	else if (data->stack_a->tp_ord == 1 && data->stack_a->next->tp_ord == 2)
-		rra(data, 0);
-}
-
-void	sort_4(t_data *data)
-{
-	int	small;
-
-	get_temp_ord(data->stack_a);
-	small = find_smallest(data->stack_a);
-	if (count_move(data->stack_a, small) < 0)
-	{
-		while (data->stack_a->ord != small)
-			rra(data, 0);
-	}
+	free(data->temp.move);
+	data->temp.move = NULL;
+	data->temp.nb_move = 0;
+	ft_lstclear(&(data->stack_a));
+	ft_lstclear(&(data->stack_b));
+	if (ac == 2)
+		init_stack_a(data, data->tab, ac);
 	else
-	{
-		while (data->stack_a->ord != small)
-			ra(data, 0);
-	}
-	pb(data);
-	sort_3(data);
-	pa(data);
+		init_stack_a(data, av, ac);
+
 }
 
 void	check_proceed(t_data *data, int algo, char **av, int ac)
 {
-	if (check_sorted(data) == 1)
+	if (ultimate_check_sorted(data) == 1 && data->stack_b == NULL)
 	{
+		if (algo == 4)
+		{
+			data->small.move = ft_strdup(data->temp.move);
+			data->small.nb_move = data->temp.nb_move;
+		}
 		if (algo == 0)
 		{
 			data->bubble.move = ft_strdup(data->temp.move);
@@ -120,28 +68,52 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 			data->truc.move = ft_strdup(data->temp.move);
 			data->truc.nb_move = data->temp.nb_move;
 		}
+		proceed(data, av, ac);
 	}
-	free(data->temp.move);
-	data->temp.move = NULL;
-	data->temp.nb_move = 0;
-	ft_lstclear(&(data->stack_a));
-	ft_lstclear(&(data->stack_b));
-	if (ac == 2)
-		init_stack_a(data, data->tab, ac);
-	else
-		init_stack_a(data, av, ac);
 }
-/*
-void	comp_algo(t_data *data)
-{
-potentiellement creer un min puis le remplacer des qu on trouve + petit, also = comment faire pour gardertrace de qulle ligne afficher ppeut etre avec un struct algo min et on la remplace des au on a le min ou c good gopush o///	
 
-}*/
+void	ft_testeee(t_data *data)
+{
+	t_nbr	*temp;
+	temp = data->stack_a;
+	while (temp != NULL)
+	{
+		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
+	temp = data->stack_b;
+	while (temp != NULL)
+	{
+		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
+		temp = temp->next;
+	}
+}
+
+t_algo	*comp_algo(t_data *data)
+{
+	t_algo	*min;
+
+	min = NULL;
+	if (data->small.nb_move != 0)
+		min = &(data->small);
+	if (min == NULL || (data->bubble.nb_move != 0
+	&& min->nb_move > data->bubble.nb_move))
+		min = &(data->bubble);
+	if (min == NULL || (data->radix.nb_move != 0
+	&& min->nb_move > data->radix.nb_move))
+		min = &(data->radix);
+	if (min == NULL || (data->truc.nb_move != 0
+	&& min->nb_move > data->truc.nb_move))
+		min = &(data->truc);
+	return (min);
+}
 
 void	push_swap(t_data *data, char **av, int ac)
 {
+	t_algo	*res;
+
 	ft_init(data, av, ac);
-	if (check_sorted(data) == 1)
+	if (ultimate_check_sorted(data) == 1)
 		end(data);
 	if (data->total == 2)
 		sa(data, 0);
@@ -151,23 +123,22 @@ void	push_swap(t_data *data, char **av, int ac)
 		sort_4(data);
 	else if (data->total == 5)
 		sort_5(data);
-	else
+	else if (data->total == 6)
+		sort_6(data);
+	check_proceed(data, 4, av, ac);	
+	if (data->total >= 6)
 	{
 		bubble_sort(data);
 		check_proceed(data, 0, av, ac);	
+		if (data->total > 70)
 		radix_sort(data);
 		check_proceed(data, 1, av, ac);
-		truc(data);
+		if (data->total > 20)
+			truc(data);
 		check_proceed(data, 2, av, ac);
 	}
-//	comp_algo(data);
-	printf("%s", data->temp.move);
-	t_nbr	*temp;
-	temp = data->stack_a;
-	while (temp != NULL)
-	{
-		printf("staka nb = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
-
+	res = comp_algo(data);
+	printf("%s", res->move);
+	printf("%d\n%s", res->nb_move, res->move);
+	printf("truc %d, radix %d, bubble %d small %d\n", data->truc.nb_move, data->radix.nb_move, data->bubble.nb_move, data->small.nb_move);
 }

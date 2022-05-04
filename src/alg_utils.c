@@ -12,6 +12,40 @@
 
 #include "../include/push_swap.h"
 
+int	check_sorted_2(t_nbr *stack)
+{
+	t_nbr	*temp;
+	int	i;
+
+	temp = stack;
+	i = ft_lstlen(stack) - 1;
+	while (temp != NULL && i == temp->tp_ord)
+	{
+		temp = temp->next;
+		i--;
+	}
+	if (i == -1)
+		return (1);
+	return (0);
+}
+
+int	check_sorted(t_nbr *stack)
+{
+	t_nbr	*temp;
+	int	i;
+
+	temp = stack;
+	i = 0;
+	while (temp != NULL && i == temp->tp_ord)
+	{
+		temp = temp->next;
+		i++;
+	}
+	if (i == ft_lstlen(stack))
+		return (1);
+	return (0);
+}
+
 int	count_move(t_nbr *stack, int rank)
 {
 	int	i;

@@ -94,7 +94,10 @@ int	check_arg(char **av, int m)
 	}
 	i = fill_stack(av, &stack_a, m);
 	if (i != 0 && m == 0)
+	{
 		freeable(av);
+		error(i, stack_a);
+	}
 	if (i != 0)
 		error(i, stack_a);
 	ft_lstclear(&stack_a);

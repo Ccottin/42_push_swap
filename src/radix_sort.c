@@ -32,22 +32,6 @@ char	*get_int(unsigned int nb)
 	}
 	return (ret);
 }
-/*binaire du nombre
-void	get_bin(t_data *data)
-{
-	int	temp;
-	t_nbr	*tmp;
-
-	tmp = data->stack_a;
-	while (tmp != NULL)
-	{
-		temp = tmp->nb;
-		tmp->bin = get_int(temp);
-		if (!tmp->bin)
-			c_error(data);
-		tmp = tmp->next;
-	}
-}*/
 
 void	get_bin(t_data *data)
 {
@@ -63,29 +47,6 @@ void	get_bin(t_data *data)
 			c_error(data);
 		tmp = tmp->next;
 	}
-}
-
-void	ft_test(t_data *data)
-{
-	t_nbr *temp;
-
-	printf("\n");
-	printf("\n");
-	temp = data->stack_a;
-	while (temp != NULL)
-	{	
-		printf("A nb = %s ord = %d\n", temp->bin, temp->ord);
-		temp = temp->next;
-	}
-	printf("\n");
-	temp = data->stack_b;
-	while (temp != NULL)
-	{
-		printf("B nb = %s ord = %d\n", temp->bin, temp->ord);
-		temp = temp->next;
-	}
-	printf("\n");
-	printf("\n");
 }
 
 int	thers_one(t_nbr *stack, int base)
@@ -185,17 +146,14 @@ void	radix_sort(t_data *data)
 		total = ft_lstlen(data->stack_b);
 		while (0 != total)
 		{
-		//	printf("char = %c, i = %d\n", data->stack_b->bin[base - 1], total);
-		//	if (data->stack_b->bin[base - 1] == '1')
-				pa(data);
+			pa(data);
 			total--;
 		}
-	//	ft_test(data);
 		base--;
 		total = check_pre_sorted(data);
 		if (total != 0)
 			pre_sort(data, total);
-		if (check_sorted(data) == 1)
+		if (ultimate_check_sorted(data) == 1)
 			return ;
 	}
 }

@@ -51,6 +51,8 @@ void	free_all(t_data *data)
 		free(data->radix.move);
 	if (data->temp.move != NULL)
 		free(data->temp.move);
+	if (data->small.move != NULL)
+		free(data->small.move);
 	if (data->tab != NULL)
 		freeable(data->tab);
 }

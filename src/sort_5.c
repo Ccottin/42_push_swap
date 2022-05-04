@@ -33,7 +33,7 @@ void	norm_35(t_data *data)
 void	sort_35(t_data *data)
 {
 	get_temp_ord(data->stack_a);
-	if (check_sorted(data) == 0)
+	if (check_sorted(data->stack_a) == 1)
 		return ;
 	if (data->stack_a->tp_ord == 0)
 	{

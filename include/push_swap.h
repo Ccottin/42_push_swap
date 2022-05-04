@@ -27,12 +27,15 @@ typedef struct s_data {
 	t_algo	bubble;
 	t_algo	radix;
 	t_algo	truc;
+	t_algo	small;
 }		t_data;
 
 
 int	ft_strlen(char *str);
 int	ft_lstlen(t_nbr *list);
-int	check_sorted(t_data *data);
+int	check_sorted(t_nbr *stack);
+int	check_sorted_2(t_nbr *stack);
+int	ultimate_check_sorted(t_data *data);
 int	check_arg(char **av, int m);
 long int	ft_atoi(char *str);
 char	**ft_split(char *s, char c);
@@ -68,7 +71,10 @@ void	truc(t_data *data);
 int	find_biggest(t_nbr *stack);
 int	find_smallest(t_nbr *stack);
 int	count_move(t_nbr *stack, int rank);
+void	sort_3(t_data *data);
+void	sort_4(t_data *data);
 void	sort_5(t_data *data);
+void	sort_6(t_data *data);
 void	get_temp_ord(t_nbr *stack);
 
 #endif
