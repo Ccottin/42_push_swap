@@ -6,7 +6,7 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:23:41 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/02 15:47:55 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:32:06 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_ord(t_data *data, t_nbr **comp)
 {
 	t_nbr	*tmp;
-	int	sup;
+	int		sup;
 
 	tmp = data->stack_a;
 	sup = 0;
@@ -32,8 +32,8 @@ void	get_ord(t_data *data, t_nbr **comp)
 
 void	ord_stacka(t_data *data)
 {
-	int	total;
 	t_nbr	*tmp;
+	int		total;
 
 	tmp = data->stack_a;
 	total = 0;
@@ -49,8 +49,8 @@ void	ord_stacka(t_data *data)
 void	init_stack_a(t_data *data, char **av, int ac)
 {
 	t_nbr	*temp;
-	int	i;
-	int	nb;
+	int		i;
+	int		nb;
 
 	i = 1;
 	if (ac == 2)

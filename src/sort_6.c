@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_6.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 16:06:55 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 16:08:53 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
@@ -60,7 +71,7 @@ void	feed_b(t_data *data)
 		while (data->stack_a->ord != small)
 		{
 			if (data->stack_a->ord == small + 1
-			|| data->stack_a->ord == small + 2)
+				|| data->stack_a->ord == small + 2)
 				pb(data);
 			rra(data, 0);
 		}
@@ -71,7 +82,7 @@ void	feed_b(t_data *data)
 		while (data->stack_a->ord != small)
 		{
 			if (data->stack_a->ord == small + 1
-			|| data->stack_a->ord == small + 2)
+				|| data->stack_a->ord == small + 2)
 				pb(data);
 			ra(data, 0);
 		}

@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 16:07:47 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 16:07:49 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
 void	get_tmp_ord(t_nbr *stack, t_nbr **comp)
 {
 	t_nbr	*tmp;
-	int	sup;
+	int		sup;
 
 	tmp = stack;
 	sup = 0;
@@ -20,7 +31,7 @@ void	get_tmp_ord(t_nbr *stack, t_nbr **comp)
 void	get_temp_ord(t_nbr *stack)
 {
 	t_nbr	*temp;
-	
+
 	temp = stack;
 	while (temp != NULL)
 	{
@@ -34,7 +45,6 @@ void	sort_3(t_data *data)
 	get_temp_ord(data->stack_a);
 	if (check_sorted(data->stack_a) == 1)
 		return ;
-
 	if (data->stack_a->tp_ord == 0)
 	{
 		rra(data, 0);

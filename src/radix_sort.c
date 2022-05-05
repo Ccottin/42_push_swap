@@ -6,48 +6,11 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:35:34 by ccottin           #+#    #+#             */
-/*   Updated: 2022/04/28 16:56:56 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/05 18:08:01 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-char	*get_int(unsigned int nb)
-{
-	char	*ret;
-	int	i;
-
-	ret = ft_calloc(33);
-	if (!ret)
-		return (NULL);
-	i = 31;
-	while (i != -1)
-	{
-		if ((nb & 1) == 1)
-			ret[i] = '1';
-		else
-			ret[i] = '0';
-		nb >>= 1;
-		i--;
-	}
-	return (ret);
-}
-
-void	get_bin(t_data *data)
-{
-	int	temp;
-	t_nbr	*tmp;
-
-	tmp = data->stack_a;
-	while (tmp != NULL)
-	{
-		temp = tmp->ord;
-		tmp->bin = get_int(temp);
-		if (!tmp->bin)
-			c_error(data);
-		tmp = tmp->next;
-	}
-}
 
 int	thers_one(t_nbr *stack, int base)
 {
@@ -62,6 +25,7 @@ int	thers_one(t_nbr *stack, int base)
 	}
 	return (0);
 }
+
 void	push_to_b(t_data *data, int base)
 {
 	int	j;
@@ -86,9 +50,9 @@ void	push_to_b(t_data *data, int base)
 
 int	check_pre_sorted(t_data *data)
 {
-	int	i;
-	int	start;
 	t_nbr	*temp;
+	int		i;
+	int		start;
 
 	temp = data->stack_a;
 	start = 0;

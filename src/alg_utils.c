@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    alg_utils.c                                       :+:      :+:    :+:   */
+/*   alg_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 19:30:40 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/01 19:40:53 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:27:31 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_sorted_2(t_nbr *stack)
 {
 	t_nbr	*temp;
-	int	i;
+	int		i;
 
 	temp = stack;
 	i = ft_lstlen(stack) - 1;
@@ -32,7 +32,7 @@ int	check_sorted_2(t_nbr *stack)
 int	check_sorted(t_nbr *stack)
 {
 	t_nbr	*temp;
-	int	i;
+	int		i;
 
 	temp = stack;
 	i = 0;
@@ -48,8 +48,8 @@ int	check_sorted(t_nbr *stack)
 
 int	count_move(t_nbr *stack, int rank)
 {
-	int	i;
-	int	total;
+	int		i;
+	int		total;
 	t_nbr	*temp;
 
 	i = 0;
@@ -68,7 +68,7 @@ int	count_move(t_nbr *stack, int rank)
 int	find_smallest(t_nbr *stack)
 {
 	t_nbr	*temp;
-	int	small;
+	int		small;
 
 	temp = stack;
 	small = 2147483647;
@@ -84,7 +84,7 @@ int	find_smallest(t_nbr *stack)
 int	find_biggest(t_nbr *stack)
 {
 	t_nbr	*temp;
-	int	big;
+	int		big;
 
 	temp = stack;
 	big = 0;

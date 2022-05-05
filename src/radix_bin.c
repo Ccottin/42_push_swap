@@ -1,44 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   radix_bin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:23:31 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/05 15:47:49 by ccottin          ###   ########.fr       */
+/*   Created: 2022/05/05 16:00:27 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 16:01:17 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	error(int err, t_nbr *stack_a)
+char	*get_int(unsigned int nb)
 {
-	write(2, "Error\n", 6);
-	ft_lstclear(&stack_a);
-	if (err == -1)
-		exit(0);
-	if (err == -2)
-		exit(1);
+	char	*ret;
+	int		i;
+
+	ret = ft_calloc(33);
+	if (!ret)
+		return (NULL);
+	i = 31;
+	while (i != -1)
+	{
+		if ((nb & 1) == 1)
+			ret[i] = '1';
+		else
+			ret[i] = '0';
+		nb >>= 1;
+		i--;
+	}
+	return (ret);
 }
 
-int	main(int ac, char **av)
+void	get_bin(t_data *data)
 {
-	t_data	data;
+	t_nbr	*tmp;
+	int		temp;
 
-	data.tab = NULL;
-	if (ac == 2)
+	tmp = data->stack_a;
+	while (tmp != NULL)
 	{
-		data.tab = ft_split(av[1], ' ');
-		if (!data.tab)
-			exit(1);
-		check_arg(data.tab, 0);
+		temp = tmp->ord;
+		tmp->bin = get_int(temp);
+		if (!tmp->bin)
+			c_error(data);
+		tmp = tmp->next;
 	}
-	else if (ac > 2)
-		check_arg(av, 1);
-	else
-		exit(0);
-	push_swap(&data, av, ac);
-	end(&data);
-	return (0);
 }

@@ -1,44 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   alg_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 11:23:31 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/05 15:47:49 by ccottin          ###   ########.fr       */
+/*   Created: 2022/05/05 15:55:41 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 18:08:51 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	error(int err, t_nbr *stack_a)
+int	ultimate_check_sorted(t_data *data)
 {
-	write(2, "Error\n", 6);
-	ft_lstclear(&stack_a);
-	if (err == -1)
-		exit(0);
-	if (err == -2)
-		exit(1);
-}
+	t_nbr	*temp;
+	int		i;
 
-int	main(int ac, char **av)
-{
-	t_data	data;
-
-	data.tab = NULL;
-	if (ac == 2)
+	temp = data->stack_a;
+	i = 0;
+	while (temp != NULL && i == temp->ord)
 	{
-		data.tab = ft_split(av[1], ' ');
-		if (!data.tab)
-			exit(1);
-		check_arg(data.tab, 0);
+		temp = temp->next;
+		i++;
 	}
-	else if (ac > 2)
-		check_arg(av, 1);
-	else
-		exit(0);
-	push_swap(&data, av, ac);
-	end(&data);
+	if (i == data->total)
+		return (1);
 	return (0);
 }

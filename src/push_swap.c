@@ -6,31 +6,19 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:19:43 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/02 15:55:28 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/05 18:23:19 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	ultimate_check_sorted(t_data *data)
-{
-	t_nbr	*temp;
-	int	i;
-
-	temp = data->stack_a;
-	i = 0;
-	while (temp != NULL && i == temp->ord)
+void	proceed(t_data *data, char **av, int ac, int algo)
+{	
+	if (algo == 2 && ultimate_check_sorted(data) == 1 && data->stack_b == NULL)
 	{
-		temp = temp->next;
-		i++;
+		data->truc.move = ft_strdup(data->temp.move);
+		data->truc.nb_move = data->temp.nb_move;
 	}
-	if (i == data->total)
-		return (1);
-	return (0);
-}
-
-void	proceed(t_data *data, char **av, int ac)
-{
 	free(data->temp.move);
 	data->temp.move = NULL;
 	data->temp.nb_move = 0;
@@ -40,7 +28,6 @@ void	proceed(t_data *data, char **av, int ac)
 		init_stack_a(data, data->tab, ac);
 	else
 		init_stack_a(data, av, ac);
-
 }
 
 void	check_proceed(t_data *data, int algo, char **av, int ac)
@@ -63,14 +50,9 @@ void	check_proceed(t_data *data, int algo, char **av, int ac)
 			data->radix.nb_move = data->temp.nb_move;
 			free_bean(data->stack_a);
 			free_bean(data->stack_b);
-		}
-		if (algo == 2)
-		{
-			data->truc.move = ft_strdup(data->temp.move);
-			data->truc.nb_move = data->temp.nb_move;
-		}
+		}	
 	}
-	proceed(data, av, ac);
+	proceed(data, av, ac, algo);
 }
 
 t_algo	*comp_algo(t_data *data)
@@ -80,34 +62,29 @@ t_algo	*comp_algo(t_data *data)
 	min = NULL;
 	if (data->small.nb_move != 0)
 		min = &(data->small);
-	if (min == NULL || (data->bubble.nb_move != 0
-	&& min->nb_move > data->bubble.nb_move))
+	if (data->bubble.nb_move != 0 && (min == NULL
+			|| min->nb_move > data->bubble.nb_move))
 		min = &(data->bubble);
-	if (min == NULL || (data->radix.nb_move != 0
-	&& min->nb_move > data->radix.nb_move))
+	if (data->radix.nb_move != 0 && (min == NULL
+			|| min->nb_move > data->radix.nb_move))
 		min = &(data->radix);
-	if (min == NULL || (data->truc.nb_move != 0
-	&& min->nb_move > data->truc.nb_move))
+	if (data->truc.nb_move != 0 && (min == NULL
+			|| min->nb_move > data->truc.nb_move))
 		min = &(data->truc);
 	return (min);
 }
 
-void	ft_testee(t_data *data)
+void	algo_bigger(t_data *data, char **av, int ac)
 {
-	t_nbr	*temp;
-	temp = data->stack_a;
-	while (temp != NULL)
-	{
-		printf("A = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
-	temp = data->stack_b;
-	while (temp != NULL)
-	{
-		printf("B = %d ord = %d\n", temp->nb, temp->ord);
-		temp = temp->next;
-	}
-	printf("\n");
+	if (data->total < 150)
+		bubble_sort(data);
+	check_proceed(data, 0, av, ac);
+	if (data->total > 70)
+		radix_sort(data);
+	check_proceed(data, 1, av, ac);
+	if (data->total > 20 && data->total < 350)
+		truc(data);
+	check_proceed(data, 2, av, ac);
 }
 
 void	push_swap(t_data *data, char **av, int ac)
@@ -129,18 +106,7 @@ void	push_swap(t_data *data, char **av, int ac)
 		sort_6(data);
 	check_proceed(data, 4, av, ac);
 	if (data->total >= 6)
-	{
-		bubble_sort(data);
-		check_proceed(data, 0, av, ac);	
-		if (data->total > 70)
-		radix_sort(data);
-		check_proceed(data, 1, av, ac);
-		if (data->total > 20)
-			truc(data);
-		check_proceed(data, 2, av, ac);
-	}
+		algo_bigger(data, av, ac);
 	res = comp_algo(data);
 	write(1, res->move, ft_strlen(res->move));
-/*	printf("%d\n%s", res->nb_move, res->move);
-	printf("truc %d, radix %d, bubble %d small %d\n", data->truc.nb_move, data->radix.nb_move, data->bubble.nb_move, data->small.nb_move);*/
 }

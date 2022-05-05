@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 15:32:46 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 15:33:12 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 void	pb(t_data *data)
@@ -50,7 +62,7 @@ void	sb(t_data *data, int x)
 	t_nbr	*temp;
 
 	if (data->stack_b->next == NULL)
-		return;
+		return ;
 	temp = data->stack_b;
 	data->stack_b = data->stack_b->next;
 	temp->next = data->stack_b->next;

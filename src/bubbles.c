@@ -6,21 +6,11 @@
 /*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:36:07 by ccottin           #+#    #+#             */
-/*   Updated: 2022/05/02 15:37:58 by ccottin          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:30:26 by ccottin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-t_nbr	*find_small(t_nbr *stack, int small)
-{
-	t_nbr	*temp;
-
-	temp = stack;
-	while (temp->ord != small)
-		temp = temp->next;
-	return (temp);
-}
 
 void	ft_ra(t_data *data, t_nbr *small)
 {
@@ -36,7 +26,7 @@ void	ft_rra(t_data *data, t_nbr *small)
 
 int	check_ord(t_data *data)
 {
-	int	i;
+	int		i;
 	t_nbr	*temp;
 
 	i = 0;
@@ -77,9 +67,9 @@ void	check_last(t_data *data)
 void	bubble_sort(t_data *data)
 {
 	t_nbr	*small;
-	int	move;
-	int	i;
-	
+	int		move;
+	int		i;
+
 	i = 0;
 	while (check_ord(data) != 1 && i < data->total)
 	{

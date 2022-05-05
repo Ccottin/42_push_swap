@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 15:33:38 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 15:34:19 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 void	ra(t_data *data, int x)
@@ -6,7 +18,7 @@ void	ra(t_data *data, int x)
 	t_nbr	*run;
 
 	if (data->stack_a == NULL || data->stack_a->next == NULL)
-		return;
+		return ;
 	temp = data->stack_a;
 	data->stack_a = data->stack_a->next;
 	run = data->stack_a;
@@ -27,7 +39,7 @@ void	rb(t_data *data, int x)
 	t_nbr	*run;
 
 	if (data->stack_b == NULL || data->stack_b->next == NULL)
-		return;
+		return ;
 	temp = data->stack_b;
 	data->stack_b = data->stack_b->next;
 	run = data->stack_b;
@@ -48,5 +60,4 @@ void	rr(t_data *data)
 	rb(data, 1);
 	data->temp.move = stock_move(data, "rr");
 	data->temp.nb_move++;
-
 }

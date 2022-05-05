@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 16:11:55 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 16:12:58 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 long int	ft_atoi(char *str)
 {
-	int		i;
 	long int	res;
-	int		sign;
+	int			i;
+	int			sign;
 
 	i = 0;
 	while ((str[i] > 8 && str[i] < 14) || str[i] == 32)
@@ -27,9 +39,9 @@ long int	ft_atoi(char *str)
 
 void	*ft_calloc(int size)
 {
-	int	i;
-	void	*ptr;
-	char	*str;
+	void		*ptr;
+	int			i;
+	char		*str;
 
 	ptr = malloc(size);
 	if (!ptr)
@@ -71,4 +83,21 @@ char	*ft_strdup(char *s)
 		i++;
 	}
 	return (ret);
+}
+
+int	ft_strncmp(char *s1, char *s2)
+{
+	int	i;
+
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while ((s1[i] || s2[i]) && (s1[i] == s2[i]))
+		i++;
+	if (s1[i] > s2[i])
+		return (1);
+	else if (s1[i] < s2[i])
+		return (-1);
+	else
+		return (0);
 }

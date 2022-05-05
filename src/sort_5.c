@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccottin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 16:03:56 by ccottin           #+#    #+#             */
+/*   Updated: 2022/05/05 16:04:54 by ccottin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
 void	sort_5_bis(t_data *data, int mark)
 {
 	int	small;
-	
+
 	small = find_smallest(data->stack_a);
 	if (count_move(data->stack_a, small) < 0)
 	{
@@ -26,7 +37,7 @@ void	norm_35(t_data *data)
 {
 	if (data->stack_b->ord < data->stack_b->next->ord)
 		ss(data);
-	else	
+	else
 		sa(data, 0);
 }
 
